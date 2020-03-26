@@ -5,11 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="adda2c9936864fb999868d5b7af32f28" Name="Diagram1">
-        <EntityTypeShape EntityType="TpiEvaluationModel.Event" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TpiEvaluationModel.EventImages" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TpiEvaluationModel.Squad" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TpiEvaluationModel.Task" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TpiEvaluationModel.Town" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TpiEvaluationModel.Event" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TpiEvaluationModel.EventImages" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TpiEvaluationModel.Squad" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TpiEvaluationModel.Task" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TpiEvaluationModel.Town" Width="1.5" PointX="4.75" PointY="3.75" />
+        <AssociationConnector Association="TpiEvaluationModel.EventImagesEvent" />
+        <AssociationConnector Association="TpiEvaluationModel.EventTask" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

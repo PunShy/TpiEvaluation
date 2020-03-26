@@ -3,12 +3,10 @@
   <EntityType Name="Event">
     <Key>
       <PropertyRef Name="id" />
-      <PropertyRef Name="TaskId" />
-      <PropertyRef Name="Sort" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="TaskId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" />
     <Property Name="RoadName" Type="nvarchar" MaxLength="50" />
     <Property Name="RoadStart" Type="nvarchar" MaxLength="50" />
     <Property Name="RoadEnd" Type="nvarchar" MaxLength="50" />
@@ -31,8 +29,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TaskId" Type="uniqueidentifier" />
-    <Property Name="EventId" Type="int" />
+    <Property Name="EventId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Sort" Type="int" />
     <Property Name="Path" Type="nchar" MaxLength="10" />
     <Property Name="Point" Type="geometry" />
@@ -42,7 +39,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nchar" MaxLength="10" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4" />
   </EntityType>
   <EntityType Name="Task">
     <Key>

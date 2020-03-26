@@ -14,11 +14,20 @@ namespace CpcBaseProject.Models
     
     public partial class Task
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Task()
+        {
+            this.Event = new HashSet<Event>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Year { get; set; }
         public Nullable<System.DateTime> Year2 { get; set; }
         public Nullable<int> SquadId { get; set; }
         public Nullable<int> TownId { get; set; }
         public Nullable<int> EventCount { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Event { get; set; }
     }
 }

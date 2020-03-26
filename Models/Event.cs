@@ -14,9 +14,15 @@ namespace CpcBaseProject.Models
     
     public partial class Event
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Event()
+        {
+            this.EventImages = new HashSet<EventImages>();
+        }
+    
+        public System.Guid id { get; set; }
         public System.Guid TaskId { get; set; }
-        public int Sort { get; set; }
+        public Nullable<int> Sort { get; set; }
         public string RoadName { get; set; }
         public string RoadStart { get; set; }
         public string RoadEnd { get; set; }
@@ -33,5 +39,9 @@ namespace CpcBaseProject.Models
         public System.Data.Entity.Spatial.DbGeometry StartPoint { get; set; }
         public System.Data.Entity.Spatial.DbGeometry EndPoint { get; set; }
         public System.Data.Entity.Spatial.DbGeometry Polygon { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventImages> EventImages { get; set; }
+        public virtual Task Task { get; set; }
     }
 }

@@ -1,14 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TpiEvaluationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Event" EntityType="TpiEvaluationModel.Event" />
+    <EntitySet Name="EventImages" EntityType="TpiEvaluationModel.EventImages" />
+    <EntitySet Name="Squad" EntityType="TpiEvaluationModel.Squad" />
+    <EntitySet Name="Task" EntityType="TpiEvaluationModel.Task" />
+    <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
+    <AssociationSet Name="EventImagesEvent" Association="TpiEvaluationModel.EventImagesEvent">
+      <End Role="EventImages" EntitySet="EventImages" />
+      <End Role="Event" EntitySet="Event" />
+    </AssociationSet>
+    <AssociationSet Name="EventTask" Association="TpiEvaluationModel.EventTask">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Event">
     <Key>
       <PropertyRef Name="id" />
-      <PropertyRef Name="TaskId" />
-      <PropertyRef Name="Sort" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Guid" Nullable="false" />
     <Property Name="TaskId" Type="Guid" Nullable="false" />
-    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="Sort" Type="Int32" />
     <Property Name="RoadName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="RoadStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="RoadEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -25,24 +38,26 @@
     <Property Name="StartPoint" Type="Geometry" />
     <Property Name="EndPoint" Type="Geometry" />
     <Property Name="Polygon" Type="Geometry" />
+    <NavigationProperty Name="EventImages" Relationship="TpiEvaluationModel.EventImagesEvent" FromRole="Event" ToRole="EventImages" />
+    <NavigationProperty Name="Task" Relationship="TpiEvaluationModel.EventTask" FromRole="Event" ToRole="Task" />
   </EntityType>
   <EntityType Name="EventImages">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TaskId" Type="Guid" />
-    <Property Name="EventId" Type="Int32" />
+    <Property Name="EventId" Type="Guid" Nullable="false" />
     <Property Name="Sort" Type="Int32" />
     <Property Name="Path" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Point" Type="Geometry" />
+    <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.EventImagesEvent" FromRole="EventImages" ToRole="Event" />
   </EntityType>
   <EntityType Name="Squad">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -54,20 +69,38 @@
     <Property Name="SquadId" Type="Int32" />
     <Property Name="TownId" Type="Int32" />
     <Property Name="EventCount" Type="Int32" />
+    <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.EventTask" FromRole="Task" ToRole="Event" />
   </EntityType>
   <EntityType Name="Town">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
     <Property Name="Town1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="SquadId" Type="Int32" />
   </EntityType>
-  <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Event" EntityType="Self.Event" />
-    <EntitySet Name="EventImages" EntityType="Self.EventImages" />
-    <EntitySet Name="Squad" EntityType="Self.Squad" />
-    <EntitySet Name="Task" EntityType="Self.Task" />
-    <EntitySet Name="Town" EntityType="Self.Town" />
-  </EntityContainer>
+  <Association Name="EventImagesEvent">
+    <End Type="TpiEvaluationModel.EventImages" Role="EventImages" Multiplicity="*" />
+    <End Type="TpiEvaluationModel.Event" Role="Event" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="EventImages">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EventTask">
+    <End Type="TpiEvaluationModel.Event" Role="Event" Multiplicity="*" />
+    <End Type="TpiEvaluationModel.Task" Role="Task" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
