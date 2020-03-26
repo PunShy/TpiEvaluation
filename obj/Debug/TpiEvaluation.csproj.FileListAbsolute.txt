@@ -89,4 +89,9 @@ D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Debug\TpiEvaluation.cspr
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Debug\TpiEvaluation.csproj.CopyComplete
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Debug\CpcBaseProject.dll
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Debug\CpcBaseProject.pdb
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\bin\EntityFramework.dll
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\bin\EntityFramework.SqlServer.dll
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\bin\EntityFramework.xml
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\bin\EntityFramework.SqlServer.xml
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\bin\zh-Hant\EntityFramework.resources.dll
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Debug\TpiEvaluation.csprojAssemblyReference.cache

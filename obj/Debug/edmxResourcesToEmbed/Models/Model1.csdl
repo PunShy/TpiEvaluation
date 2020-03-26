@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TpiEvaluationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="TaskId" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="TaskId" Type="Guid" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="RoadName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoadStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoadEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoadLength" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="RoadWidth" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="SidewalkStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SidewalkEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SidewalkLength" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="StartX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="StartY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EndX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EndY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="StartPoint" Type="Geometry" />
+    <Property Name="EndPoint" Type="Geometry" />
+    <Property Name="Polygon" Type="Geometry" />
+  </EntityType>
+  <EntityType Name="EventImages">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Guid" />
+    <Property Name="EventId" Type="Int32" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="Path" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Point" Type="Geometry" />
+  </EntityType>
+  <EntityType Name="Squad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Year2" Type="DateTime" Precision="0" />
+    <Property Name="SquadId" Type="Int32" />
+    <Property Name="TownId" Type="Int32" />
+    <Property Name="EventCount" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Town1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SquadId" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Event" EntityType="Self.Event" />
+    <EntitySet Name="EventImages" EntityType="Self.EventImages" />
+    <EntitySet Name="Squad" EntityType="Self.Squad" />
+    <EntitySet Name="Task" EntityType="Self.Task" />
+    <EntitySet Name="Town" EntityType="Self.Town" />
+  </EntityContainer>
+</Schema>
