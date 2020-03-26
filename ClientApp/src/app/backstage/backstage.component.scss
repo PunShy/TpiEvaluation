@@ -1,0 +1,15 @@
+.backstage {
+  position: relative;
+  .map {
+    width: 100%;
+    height: 500px;
+  }
+  .kt-offcanvas-panel.kt-offcanvas-panel--on {
+    top: 136px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .backstage {
+  }
+}

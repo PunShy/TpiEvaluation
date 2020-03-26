@@ -1,0 +1,6 @@
+{
+  "/ProjectMaterialExperiment/api": {
+    "target": "http://localhost:23984",
+    "secure": false
+  }
+}

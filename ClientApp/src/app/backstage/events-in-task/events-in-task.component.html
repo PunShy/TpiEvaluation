@@ -1,0 +1,72 @@
+<!--begin::Portlet-->
+<div class="kt-portlet" #tProtlet>
+  <!-- <div class="kt-portlet__head taskHead">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title dataList">
+        道路列表
+      </h3>
+    </div>
+  </div> -->
+
+
+  <div class="kt-portlet__body" style="overflow: auto; height: 500px;">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> {{dataTitle[column]}} </th>
+        <td mat-cell *matCellDef="let element" class="text-right">
+          <div *ngIf="!!element[column]; else tDel" (click)="switchOpen($event, element);">
+            {{element[column]}}
+          </div>
+          <ng-template #tDel>
+            <div #tDel (click)="runDelete(element)">
+              <i class="flaticon2-delete delBtn"></i>
+            </div>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail kt-form"
+            [@detailExpand]="(element === this.expandedElement) ? 'expanded' : 'collapsed'">
+
+            <div class="kt-portlet__body">
+              <div class="form-group">
+                <label>道路名稱</label>
+                <input type="email" class="form-control" placeholder="道路名稱">
+              </div>
+              <div class="form-group">
+                <label>路段起點</label>
+                <input type="email" class="form-control" placeholder="路段起點">
+              </div>
+              <div class="form-group">
+                <label>路段迄點</label>
+                <input type="email" class="form-control" placeholder="路段迄點">
+              </div>
+              <div class="form-group">
+                <label>道路長度(公尺)</label>
+                <input type="number" class="form-control" placeholder="道路長度(公尺)">
+              </div>
+              <div class="form-group">
+                <label>道路寬度(公尺)</label>
+                <input type="number" class="form-control" placeholder="道路寬度(公尺)">
+              </div>
+            </div>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+
+  </div>
+</div>
+
+<!--end::Portlet-->

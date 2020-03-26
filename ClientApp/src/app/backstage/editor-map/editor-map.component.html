@@ -1,0 +1,119 @@
+<div class="editor-range alert alert-light alert-elevate fade show ">
+  <div class="kt-header__topbar mapToolBarContent">
+    <div class="kt-header__topbar-item mapToolBar">
+      <div id="mapToolBar" class="btn-group" role="group" aria-label="Basic example" *ngIf="isShowEditor">
+        <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
+          (click)="drawLine($event.target);">
+          <i class="fa fa-road"></i>畫道路
+        </button>
+        <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
+          (click)="drawPoint($event.target);">
+          <i class="fa fa-images"></i>放照片
+        </button>
+        <!-- <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
+          (click)="selectedChange($event.target); ">
+          <i class="fa fa-poo"></i>丟大便
+        </button> -->
+      </div>
+      <!-- <span class="kt-switch kt-switch--sm kt-switch--icon isModifySwitch">
+        <label>
+          <label>是否修改</label>
+          <input type="checkbox" name="" (click)="modifyState($event.target)">
+          <span></span>
+        </label>
+      </span> -->
+    </div>
+    <div class="kt-header__topbar-item ">
+      <!--begin: 控制台開關 -->
+      <button type="button" class="btn btn-brand btn-elevate btn-pill btn-elevate-air editorBtn"
+        (click)="isShowEditor=!isShowEditor">
+        <i class="fa fa-edit"></i>編輯視窗</button>
+
+      <!--end: 控制台開關 -->
+    </div>
+  </div>
+</div>
+
+
+
+<!-- begin: 控制台 -->
+<div id="kt_offcanvas_toolbar_search" class="kt-offcanvas-panel editorView"
+  [ngClass]="{'kt-offcanvas-panel--on': isShowEditor}">
+  <div class="kt-offcanvas-panel__head">
+    <h3 class="kt-offcanvas-panel__title">
+      編輯視窗
+    </h3>
+    <a class="kt-offcanvas-panel__close" id="kt_offcanvas_toolbar_search_close" (click)="isShowEditor=!isShowEditor"><i
+        class="flaticon2-delete"></i></a>
+  </div>
+  <div class="kt-offcanvas-panel__body">
+
+    <!-- begin:: Quick Search -->
+    <div class="kt-quick-search kt-quick-search--offcanvas" id="kt_quick_search_offcanvas">
+      <div method="get" action="#" class="kt-quick-search__form">
+        <div>
+          <div class="form-group editorTitle">
+            <div class="">
+              <mat-form-field>
+                <mat-label>選擇日期</mat-label>
+                <input matInput [matDatepicker]="picker" disabled>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group editorTitle">
+            <label for="exampleSelect1">行政區</label>
+            <select class="form-control" id="exampleSelect1">
+              <option disabled selected>請選擇</option>
+              <option value="63000100">大同區</option>
+              <option value="63000104">中山區</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <div data-scroll="true">
+        <mat-tab-group [(selectedIndex)]="selectedSquad">
+          <mat-tab label="一分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task #tTab1 [squad]="selectedSquad" [dataTitle]="dataTitle"
+               (delete)="reomveDrawFromDataList($event)"
+            [dataSource]="dataSource.data1"></app-events-in-task>
+          </mat-tab>
+          <mat-tab label="二分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task #tTab2 [squad]="selectedSquad" [dataTitle]="dataTitle"
+            [dataSource]="dataSource.data2"></app-events-in-task>
+          </mat-tab>
+          <mat-tab label="三分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
+            [dataSource]="dataSource.data3"></app-events-in-task>
+          </mat-tab>
+          <mat-tab label="四分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
+            [dataSource]="dataSource.data4"></app-events-in-task>
+          </mat-tab>
+          <mat-tab label="五分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
+            [dataSource]="dataSource.data5"></app-events-in-task>
+          </mat-tab>
+          <mat-tab label="六分隊" >
+            <!-- <app-add-task></app-add-task> -->
+            <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
+            [dataSource]="dataSource.data6"></app-events-in-task>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+
+    </div>
+
+    <!-- end:: Quick Search -->
+  </div>
+</div>
+<!-- end: 控制台 -->

@@ -1,0 +1,90 @@
+.kt-portlet {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 300px;
+  z-index: 1;
+}
+
+.form-group.editorTitle{
+  margin: 0px;
+}
+
+app-add-task > div {
+  margin-top: 10px;
+}
+
+.kt-offcanvas-panel__body,
+#kt_quick_search_offcanvas,
+.kt-quick-search__wrapper,
+.kt-quick-search__result,
+.tab-content {
+  height: 100%;
+}
+
+.kt-offcanvas-panel {
+  overflow: hidden;
+}
+.editor-range {
+  margin: 0px;
+  padding: 5px 10px;
+}
+.kt-header__topbar,
+.kt-header-menu-wrapper {
+  background-color: #fefefe;
+  width: 100%;
+  padding: 0px;
+}
+.btn-warning-active {
+  color: #212529;
+  background-color: #ffb822;
+  border-color: #ffb822;
+  color: #111111;
+}
+.mapToolBar {
+  width: 90%;
+}
+.editorBtn {
+  width: 104px;
+}
+.kt-offcanvas-panel {
+  width: 50% !important;
+  right: -50%;
+}
+#kt_offcanvas_toolbar_search {
+  border-left: 1px #dfeae7 solid;
+}
+
+.editorView {
+  z-index: 97;
+}
+.isModifySwitch {
+  padding: 5px 10px 6px 10px;
+  label {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mapToolBarContent {
+    top: 169px;
+  }
+  .editorBtn {
+    width: 97px;
+  }
+}
+
+@media (max-width: 512px) {
+  #kt_offcanvas_toolbar_search {
+    top: calc(100%);
+    left: 0;
+    width: 100% !important;
+    transition: top 0.3s ease, right 0.3s ease;
+  }
+  #kt_offcanvas_toolbar_search.kt-offcanvas-panel--on {
+    top: calc(50%);
+    .kt-offcanvas-panel__body {
+      // overflow: auto;
+    }
+  }
+}
