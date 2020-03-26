@@ -109,8 +109,8 @@ namespace CpcBaseProject.Controllers
             {
                 return NotFound();
             }
-            IEnumerable<EventImages> eiList = db.EventImages.Where(a => a.EventId == id).ToList();
-            if(eiList.Count() == 0)
+            IEnumerable<EventImages> eiList = @event.EventImages.Select(a => a).ToList();
+            if (eiList.Count() == 0)
             {
                 return NotFound();
             }
