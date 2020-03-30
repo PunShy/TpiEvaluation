@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BackstageModule } from './backstage.module';
+import { HttpService } from '../http.service';
 
-@Injectable({
-  providedIn: BackstageModule
-})
+@Injectable()
 export class BackstageService {
 
-  constructor() { }
+  constructor(private httpSer: HttpService) { }
+
+
+  getTown(){
+    this.httpSer.webapiUrl('Towns');
+    return this.httpSer.getData();
+  }
+
+
 }

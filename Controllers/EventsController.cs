@@ -15,7 +15,7 @@ namespace CpcBaseProject.Controllers
     public class EventsController : ApiController
     {
         private TpiEvaluationEntities db = new TpiEvaluationEntities();
-
+       
         // GET: api/Events
         public IQueryable<Event> GetEvent()
         {

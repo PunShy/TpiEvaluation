@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header/header.component';
 import { HeaderMobileComponent } from './header/header-mobile/header-mobile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
   ],
   entryComponents: [AppComponent],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

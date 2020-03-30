@@ -21,10 +21,10 @@
           <Property Name="SidewalkEnd" Type="nvarchar" MaxLength="50" />
           <Property Name="SidewalkLength" Type="nvarchar" MaxLength="50" />
           <Property Name="Memo" Type="nvarchar" MaxLength="200" />
-          <Property Name="StartX" Type="nchar" MaxLength="10" />
-          <Property Name="StartY" Type="nchar" MaxLength="10" />
-          <Property Name="EndX" Type="nchar" MaxLength="10" />
-          <Property Name="EndY" Type="nchar" MaxLength="10" />
+          <Property Name="StartX" Type="varchar" MaxLength="20" />
+          <Property Name="StartY" Type="varchar" MaxLength="20" />
+          <Property Name="EndX" Type="varchar" MaxLength="20" />
+          <Property Name="EndY" Type="varchar" MaxLength="20" />
           <Property Name="StartPoint" Type="geometry" />
           <Property Name="EndPoint" Type="geometry" />
           <Property Name="Polygon" Type="geometry" />
@@ -62,7 +62,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="Town" Type="nvarchar" MaxLength="10" />
+          <Property Name="TownText" Type="nvarchar" MaxLength="10" />
           <Property Name="SquadId" Type="int" />
         </EntityType>
         <EntityContainer Name="TpiEvaluationModelStoreContainer">
@@ -76,12 +76,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TpiEvaluationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Event" EntityType="TpiEvaluationModel.Event" />
           <EntitySet Name="EventImages" EntityType="TpiEvaluationModel.EventImages" />
           <EntitySet Name="Squad" EntityType="TpiEvaluationModel.Squad" />
           <EntitySet Name="Task" EntityType="TpiEvaluationModel.Task" />
-          <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
           <AssociationSet Name="EventImagesEvent" Association="TpiEvaluationModel.EventImagesEvent">
             <End Role="EventImages" EntitySet="EventImages" />
             <End Role="Event" EntitySet="Event" />
@@ -90,6 +89,7 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
+          <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -107,10 +107,10 @@
           <Property Name="SidewalkEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SidewalkLength" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StartX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="StartY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EndX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EndY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StartX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StartY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EndX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EndY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="StartPoint" Type="Geometry" />
           <Property Name="EndPoint" Type="Geometry" />
           <Property Name="Polygon" Type="Geometry" />
@@ -147,14 +147,6 @@
           <Property Name="EventCount" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.EventTask" FromRole="Task" ToRole="Event" />
         </EntityType>
-        <EntityType Name="Town">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Town1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SquadId" Type="Int32" />
-        </EntityType>
         <Association Name="EventImagesEvent">
           <End Type="TpiEvaluationModel.EventImages" Role="EventImages" Multiplicity="*" />
           <End Type="TpiEvaluationModel.Event" Role="Event" Multiplicity="1" />
@@ -179,6 +171,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TownText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SquadId" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -245,7 +245,7 @@
             <EntityTypeMapping TypeName="TpiEvaluationModel.Town">
               <MappingFragment StoreEntitySet="Town">
                 <ScalarProperty Name="SquadId" ColumnName="SquadId" />
-                <ScalarProperty Name="Town1" ColumnName="Town" />
+                <ScalarProperty Name="TownText" ColumnName="TownText" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

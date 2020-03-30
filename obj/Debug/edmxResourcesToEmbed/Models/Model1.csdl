@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TpiEvaluationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="false">
     <EntitySet Name="Event" EntityType="TpiEvaluationModel.Event" />
     <EntitySet Name="EventImages" EntityType="TpiEvaluationModel.EventImages" />
     <EntitySet Name="Squad" EntityType="TpiEvaluationModel.Squad" />
     <EntitySet Name="Task" EntityType="TpiEvaluationModel.Task" />
-    <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
     <AssociationSet Name="EventImagesEvent" Association="TpiEvaluationModel.EventImagesEvent">
       <End Role="EventImages" EntitySet="EventImages" />
       <End Role="Event" EntitySet="Event" />
@@ -14,6 +13,7 @@
       <End Role="Event" EntitySet="Event" />
       <End Role="Task" EntitySet="Task" />
     </AssociationSet>
+    <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
   </EntityContainer>
   <EntityType Name="Event">
     <Key>
@@ -31,10 +31,10 @@
     <Property Name="SidewalkEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SidewalkLength" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="StartX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="StartY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="EndX" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="EndY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="StartX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StartY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EndX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EndY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="StartPoint" Type="Geometry" />
     <Property Name="EndPoint" Type="Geometry" />
     <Property Name="Polygon" Type="Geometry" />
@@ -71,14 +71,6 @@
     <Property Name="EventCount" Type="Int32" />
     <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.EventTask" FromRole="Task" ToRole="Event" />
   </EntityType>
-  <EntityType Name="Town">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="Town1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="SquadId" Type="Int32" />
-  </EntityType>
   <Association Name="EventImagesEvent">
     <End Type="TpiEvaluationModel.EventImages" Role="EventImages" Multiplicity="*" />
     <End Type="TpiEvaluationModel.Event" Role="Event" Multiplicity="1" />
@@ -103,4 +95,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="TownText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SquadId" Type="Int32" />
+  </EntityType>
 </Schema>

@@ -61,7 +61,7 @@
       <EntityTypeMapping TypeName="TpiEvaluationModel.Town">
         <MappingFragment StoreEntitySet="Town">
           <ScalarProperty Name="SquadId" ColumnName="SquadId" />
-          <ScalarProperty Name="Town1" ColumnName="Town" />
+          <ScalarProperty Name="TownText" ColumnName="TownText" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

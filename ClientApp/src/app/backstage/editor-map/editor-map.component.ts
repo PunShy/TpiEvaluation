@@ -3,6 +3,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { OlBaseComponent } from 'src/app/ol/ol-base/ol-base.component';
 import { OlService } from 'src/app/ol/ol.service';
 import { Feature } from 'ol';
+import { BackstageService } from '../backstage.service';
+import { fromEvent } from 'rxjs';
 
 
 @Component({
@@ -22,8 +24,14 @@ export class EditorMapComponent implements OnInit {
   isShowEditor = true;
 
   olMapDrawInit = false;
+  towns: ITown[] = [];
+  selTowns: ITown[] = [];
 
-  constructor(public olSer: OlService) {
+  constructor(public olSer: OlService, private backstageSer: BackstageService) {
+    this.backstageSer.getTown().subscribe((res: ITown[]) => {
+      this.towns = res;
+      this.changeTowns(this.selectedSquad);
+    });
   }
 
   ngOnInit(): void {
@@ -71,12 +79,12 @@ export class EditorMapComponent implements OnInit {
   }
   addDrawToDataList(feature1: Feature, cbThis: any) {
     const datas: IEventInfo[] = [{
-      year: '2021/03/20',
-      town: '63000103',
-      roadName: '忠孝東路一段99巷',
-      roadLength: '99',
+      year: '待輸入',
+      town: '待輸入',
+      roadName: '待輸入',
+      roadLength: '0',
       feature: feature1,
-      squad: (cbThis.selectedSquad + 1).toString()
+      squad: (cbThis.selectedSquad + 1).toString(),
     }];
     const target = cbThis as EditorMapComponent;
     const selTab = target.getSelectedTab();
@@ -136,6 +144,19 @@ export class EditorMapComponent implements OnInit {
         break;
     }
   }
+
+  changeTowns(val: number) {
+    this.selTowns = this.towns.filter(item => {
+      return item.SquadId === (val + 1);
+    });
+  }
+  olViewChange(val: number) {
+    this.olSer.clearView();
+    const selTab = this.getSelectedTab();
+    this.dataSource[selTab].forEach(d => {
+      this.olSer.addFeature(d.feature);
+    });
+  }
 }
 
 export interface ITaskDatas {
@@ -158,7 +179,17 @@ export interface IOlFeature {
 export interface IEventInfo extends ITaskInfo, IOlFeature {
   roadName?: string;
   roadLength?: string;
-
+  roadStart?: string;
+  roadEnd?: string;
+  roadWidth?: string;
+  sidewalkStart?: string;
+  sidewalkLength?: string;
+  memo?: string;
+}
+export interface ITown {
+  Id: string;
+  TownText: string;
+  SquadId: number;
 }
 
 export const ColumnTitle: IEventInfo = {
@@ -168,40 +199,40 @@ export const ColumnTitle: IEventInfo = {
   roadLength: '道路長度(公尺)'
 }
 
-export const townName: { id: string, name: string }[] = [
-  { id: '63000103', name: '大同區' },
-  { id: '63000104', name: '中山區' }
-];
+// export const townName: { id: string, name: string }[] = [
+//   { id: '63000103', name: '大同區' },
+//   { id: '63000104', name: '中山區' }
+// ];
 
-const ELEMENT_DATA: IEventInfo[] = [
-  // {
-  //   year: '2020/03/20',
-  //   town: '63000103',
-  //   roadName: '忠孝東路一段80巷',
-  //   roadLength: '13'
-  // },
-  // {
-  //   year: '2020/03/21',
-  //   town: '63000104',
-  //   roadName: '忠孝東路一段80巷',
-  //   roadLength: '14'
-  // },
-  // {
-  //   year: '2020/03/22',
-  //   town: '63000103',
-  //   roadName: '忠孝東路一段80巷',
-  //   roadLength: '15'
-  // },
-  // {
-  //   year: '2020/03/23',
-  //   town: '63000104',
-  //   roadName: '忠孝東路一段80巷',
-  //   roadLength: '16'
-  // },
-  // {
-  //   year: '2020/03/24',
-  //   town: '63000103',
-  //   roadName: '忠孝東路一段80巷',
-  //   roadLength: '13'
-  // },
-];
+// const ELEMENT_DATA: IEventInfo[] = [
+//   // {
+//   //   year: '2020/03/20',
+//   //   town: '63000103',
+//   //   roadName: '忠孝東路一段80巷',
+//   //   roadLength: '13'
+//   // },
+//   // {
+//   //   year: '2020/03/21',
+//   //   town: '63000104',
+//   //   roadName: '忠孝東路一段80巷',
+//   //   roadLength: '14'
+//   // },
+//   // {
+//   //   year: '2020/03/22',
+//   //   town: '63000103',
+//   //   roadName: '忠孝東路一段80巷',
+//   //   roadLength: '15'
+//   // },
+//   // {
+//   //   year: '2020/03/23',
+//   //   town: '63000104',
+//   //   roadName: '忠孝東路一段80巷',
+//   //   roadLength: '16'
+//   // },
+//   // {
+//   //   year: '2020/03/24',
+//   //   town: '63000103',
+//   //   roadName: '忠孝東路一段80巷',
+//   //   roadLength: '13'
+//   // },
+// ];

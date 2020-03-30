@@ -1,6 +1,7 @@
 {
-  "/ProjectMaterialExperiment/api": {
-    "target": "http://localhost:23984",
-    "secure": false
+  "/api/": {
+    "target": "http://localhost:53328",
+    "secure": false,
+    "changeOrigin": true
   }
 }

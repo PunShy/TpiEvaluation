@@ -56,8 +56,14 @@ export class OlService {
     }
   }
 
-  deleteFeature(feature: Feature){
-    (this.olMap.getLayers().getArray()[1] as VectorLayer ).getSource().removeFeature(feature);
+  clearView() {
+    this.drawSource.clear();
+  }
+  deleteFeature(feature: Feature) {
+    this.drawSource.removeFeature(feature);
+  }
+  addFeature(feature: Feature) {
+    this.drawSource.addFeature(feature);
   }
 
   private reomveInteractions() {

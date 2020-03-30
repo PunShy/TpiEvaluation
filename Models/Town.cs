@@ -15,7 +15,7 @@ namespace CpcBaseProject.Models
     public partial class Town
     {
         public string Id { get; set; }
-        public string Town1 { get; set; }
+        public string TownText { get; set; }
         public Nullable<int> SquadId { get; set; }
     }
 }

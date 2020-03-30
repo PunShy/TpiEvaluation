@@ -8,6 +8,8 @@ import { EditorMapComponent } from './editor-map/editor-map.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { EventsInTaskComponent } from './events-in-task/events-in-task.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { BackstageService } from './backstage.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,8 +17,10 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
   imports: [
     CommonModule,
     BackstageRoutingModule,
+    FormsModule,
     NgMaterialModule,
     OlModule
-  ]
+  ],
+  providers: [BackstageService]
 })
 export class BackstageModule { }

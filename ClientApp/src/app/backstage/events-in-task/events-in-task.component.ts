@@ -3,8 +3,7 @@ import {
   AfterContentInit, AfterContentChecked, OnDestroy, DoCheck, Output, EventEmitter
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { IEventInfo } from '../editor-map/editor-map.component';
-
+import { IEventInfo, ITown } from '../editor-map/editor-map.component';
 
 
 export function myInlineMatcherFn(fromState: string, toState: string, element: HTMLElement,
@@ -49,8 +48,14 @@ export class EventsInTaskComponent implements OnInit {
   expandedElement: any | null = null;
   @Input()
   squad: number;
+
+  @Input()
+  towns: ITown[];
+
   @Output()
   delete = new EventEmitter<IEventInfo>();
+
+
 
   // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   columnsToDisplay = ['year', 'town', 'roadName', 'roadLength', 'delete'];
@@ -58,6 +63,11 @@ export class EventsInTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  aaa(obj){
+    console.log(obj);
   }
 
   switchOpen(eve: MouseEvent, element) {

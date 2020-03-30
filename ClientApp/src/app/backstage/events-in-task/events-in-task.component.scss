@@ -18,13 +18,16 @@
   background-color: #f2f5f4;
 }
 
+div.click-cursor{
+  cursor: pointer;
+}
+
 table{
   th, td{
     padding: 3px;
   }
 }
 .delBtn{
-  cursor: pointer;
   color: red;
   padding: 5px;
 }

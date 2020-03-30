@@ -16,10 +16,10 @@
     <Property Name="SidewalkEnd" Type="nvarchar" MaxLength="50" />
     <Property Name="SidewalkLength" Type="nvarchar" MaxLength="50" />
     <Property Name="Memo" Type="nvarchar" MaxLength="200" />
-    <Property Name="StartX" Type="nchar" MaxLength="10" />
-    <Property Name="StartY" Type="nchar" MaxLength="10" />
-    <Property Name="EndX" Type="nchar" MaxLength="10" />
-    <Property Name="EndY" Type="nchar" MaxLength="10" />
+    <Property Name="StartX" Type="varchar" MaxLength="20" />
+    <Property Name="StartY" Type="varchar" MaxLength="20" />
+    <Property Name="EndX" Type="varchar" MaxLength="20" />
+    <Property Name="EndY" Type="varchar" MaxLength="20" />
     <Property Name="StartPoint" Type="geometry" />
     <Property Name="EndPoint" Type="geometry" />
     <Property Name="Polygon" Type="geometry" />
@@ -57,7 +57,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
-    <Property Name="Town" Type="nvarchar" MaxLength="10" />
+    <Property Name="TownText" Type="nvarchar" MaxLength="10" />
     <Property Name="SquadId" Type="int" />
   </EntityType>
   <EntityContainer Name="TpiEvaluationModelStoreContainer">

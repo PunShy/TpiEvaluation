@@ -18,6 +18,7 @@ namespace CpcBaseProject.Models
         public TpiEvaluationEntities()
             : base("name=TpiEvaluationEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
