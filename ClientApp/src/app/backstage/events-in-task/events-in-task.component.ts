@@ -1,9 +1,10 @@
 import {
-  Component, OnInit, Input, ViewChild, ElementRef, AfterViewChecked, AfterViewInit,
-  AfterContentInit, AfterContentChecked, OnDestroy, DoCheck, Output, EventEmitter
+  Component, OnInit, OnChanges, Input, ViewChild, ElementRef, AfterViewChecked, AfterViewInit,
+  AfterContentInit, AfterContentChecked, OnDestroy, DoCheck, Output, EventEmitter, SimpleChanges
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { IEventInfo, ITown } from '../editor-map/editor-map.component';
+import { NgForm } from '@angular/forms';
 
 
 export function myInlineMatcherFn(fromState: string, toState: string, element: HTMLElement,
@@ -37,7 +38,7 @@ export function myInlineMatcherFn(fromState: string, toState: string, element: H
     ]),
   ],
 })
-export class EventsInTaskComponent implements OnInit {
+export class EventsInTaskComponent implements OnInit, OnChanges {
 
   // @ViewChild('tProtlet', { static: true }) protlet: ElementRef;
   @Input()
@@ -55,19 +56,41 @@ export class EventsInTaskComponent implements OnInit {
   @Output()
   delete = new EventEmitter<IEventInfo>();
 
+  @Output()
+  goSubmit = new EventEmitter<IEventInfo>();
+
 
 
   // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay = ['year', 'town', 'roadName', 'roadLength', 'delete'];
+  columnsToDisplay = ['year', 'townText', 'roadName', 'roadLength', 'delete'];
+
+  isimgUploadOpen = false;
 
   constructor() { }
 
   ngOnInit(): void {
 
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.dataSource) { return; }
+    this.changeTownText();
+  }
 
-  aaa(obj){
-    console.log(obj);
+  changeTownText() {
+    this.dataSource.forEach(item => {
+      const temp = this.towns.filter(town1 => {
+        return item.town === town1.Id;
+      })[0];
+      if (!!temp) {
+        item.townText = temp.TownText;
+      } else {
+        item.townText = item.town;
+      }
+    })
+  }
+
+  closeDatepicker(date, element: IEventInfo) {
+    element.year = moment(date.value).format('YYYY/MM/DD');
   }
 
   switchOpen(eve: MouseEvent, element) {
@@ -77,6 +100,10 @@ export class EventsInTaskComponent implements OnInit {
 
   runDelete(val: IEventInfo) {
     this.delete.emit(val);
+  }
+  onSubmit(form: NgForm, val: IEventInfo) {
+    if (form.invalid) return;
+    this.goSubmit.emit(val);
   }
 
 }

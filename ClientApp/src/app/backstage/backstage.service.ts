@@ -13,5 +13,8 @@ export class BackstageService {
     return this.httpSer.getData();
   }
 
+  saveData(data: any){
+
+  }
 
 }

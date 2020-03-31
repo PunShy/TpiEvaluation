@@ -32,51 +32,76 @@
             [@detailExpand]="(element === this.expandedElement) ? 'expanded' : 'collapsed'">
 
             <div class="kt-portlet__body editorBkColor">
-
-              <div class="form-group ">
-                <div class="">
-                  <mat-form-field>
-                    <mat-label>選擇日期</mat-label>
-                    <input matInput [matDatepicker]="picker" disabled [(ngModel)]="element.year" name="year">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker disabled="false"></mat-datepicker>
-                  </mat-form-field>
+              <form (ngSubmit)="onSubmit(form, element)" #form="ngForm">
+                <div class="form-group ">
+                  <div class="">
+                    <mat-form-field>
+                      <mat-label>選擇日期</mat-label>
+                      <input matInput [matDatepicker]="picker" required disabled
+                        (dateChange)="closeDatepicker($event, element)" name="year">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group ">
-                <label for="exampleSelect1">行政區</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option disabled selected>請選擇</option>
-                  <option value="{{item.Id}}" *ngFor="let item of towns" >{{item.TownText}}</option>
-                </select>
-              </div>
+                <div class="form-group ">
+                  <label for="exampleSelect1">行政區</label>
+                  <select class="form-control" id="exampleSelect1" [(ngModel)]="element.town" name="town" required
+                    (change)="changeTownText()">
+                    <option disabled selected>請選擇</option>
+                    <option [value]="item.Id" *ngFor="let item of towns">{{item.TownText}}</option>
+                  </select>
+                </div>
 
-              <div class="form-group">
-                <label>道路名稱</label>
-                <input type="email" class="form-control" placeholder="道路名稱" name="roadName" [(ngModel)]="element.roadName">
-              </div>
-              <div class="form-group">
-                <label>路段起點</label>
-                <input type="email" class="form-control" placeholder="路段起點" name="roadStart" [(ngModel)]="element.roadStart">
-              </div>
-              <div class="form-group">
-                <label>路段迄點</label>
-                <input type="email" class="form-control" placeholder="路段迄點" name="roadEnd" [(ngModel)]="element.roadEnd">
-              </div>
-              <div class="form-group">
-                <label>道路長度(公尺)</label>
-                <input type="number" class="form-control" placeholder="道路長度(公尺)" name="roadLenght" [(ngModel)]="element.roadLength">
-              </div>
-              <div class="form-group">
-                <label>道路寬度(公尺)</label>
-                <input type="number" class="form-control" placeholder="道路寬度(公尺)" name="roadWidth" [(ngModel)]="element.roadWidth">
-              </div>
-              <div class="form-group">
-                <label>備註</label>
-                <input type="number" class="form-control" placeholder="請輸入..." name="memo" [(ngModel)]="element.memo">
-              </div>
+                <div class="form-group">
+                  <label>道路名稱</label>
+                  <input type="email" class="form-control" placeholder="道路名稱" name="roadName" required
+                    [(ngModel)]="element.roadName">
+                </div>
+                <div class="form-group">
+                  <label>路段起點</label>
+                  <input type="email" class="form-control" placeholder="路段起點" name="roadStart" required
+                    [(ngModel)]="element.roadStart">
+                </div>
+                <div class="form-group">
+                  <label>路段迄點</label>
+                  <input type="email" class="form-control" placeholder="路段迄點" name="roadEnd" required
+                    [(ngModel)]="element.roadEnd">
+                </div>
+                <div class="form-group">
+                  <label>道路長度(公尺)</label>
+                  <input type="number" class="form-control" placeholder="道路長度(公尺)" name="roadLenght" required
+                    [(ngModel)]="element.roadLength">
+                </div>
+                <div class="form-group">
+                  <label>道路寬度(公尺)</label>
+                  <input type="number" class="form-control" placeholder="道路寬度(公尺)" name="roadWidth" required
+                    [(ngModel)]="element.roadWidth">
+                </div>
+                <div class="form-group">
+                  <label>備註</label>
+                  <input type="text" class="form-control" placeholder="請輸入..." name="memo" [(ngModel)]="element.memo">
+                </div>
+                <button type="button" class="btn btn-outline-brand btn-icon"
+                  (click)="isimgUploadOpen = !isimgUploadOpen">
+                  <i class="fa fa-cloud-upload-alt"></i></button>
+                <button type="submit" class="btn btn-warning btn-sm saveBtn">儲存</button>
+              </form>
             </div>
-
+          </div>
+          <div class="card imgUpload" [ngClass]="{'open': isimgUploadOpen}">
+            <div class="card-header kt-font-bolder">
+              <button type="button" class="btn btn-outline-brand btn-icon" (click)="isimgUploadOpen = !isimgUploadOpen">
+                <i class="fa fa-angle-double-up"></i></button>
+                <h3>缺失照片</h3>
+            </div>
+            <div class="card-body">
+              <!-- <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote> -->
+            </div>
           </div>
         </td>
       </ng-container>

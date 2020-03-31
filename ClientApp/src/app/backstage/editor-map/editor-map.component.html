@@ -6,10 +6,10 @@
           (click)="drawLine($event.target);">
           <i class="fa fa-road"></i>畫道路
         </button>
-        <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
+        <!-- <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
           (click)="drawPoint($event.target);">
           <i class="fa fa-images"></i>放照片
-        </button>
+        </button> -->
         <!-- <button type="button" class="btn btn-secondary btn-elevate btn-elevate-air"
           (click)="selectedChange($event.target); ">
           <i class="fa fa-poo"></i>丟大便
@@ -59,7 +59,8 @@
         <mat-tab-group [(selectedIndex)]="selectedSquad" (selectedIndexChange)="changeTowns($event);olViewChange($event);">
           <mat-tab label="一分隊" >
             <app-events-in-task #tTab1 [squad]="selectedSquad" [dataTitle]="dataTitle"
-               (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+               (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+               [towns]="selTowns"
                [dataSource]="dataSource.data1"></app-events-in-task>
           </mat-tab>
           <mat-tab label="二分隊" >

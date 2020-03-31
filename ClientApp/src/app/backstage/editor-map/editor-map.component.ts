@@ -70,6 +70,13 @@ export class EditorMapComponent implements OnInit {
     });
   }
 
+  goSubmit(val: IEventInfo){
+    const data = {
+
+    };
+    this.backstageSer.saveData(data);
+  }
+
   reomveDrawFromDataList(val: IEventInfo) {
     const selTab = this.getSelectedTab();
     this.dataSource[selTab] = this.dataSource[selTab].filter(item => {
@@ -79,9 +86,9 @@ export class EditorMapComponent implements OnInit {
   }
   addDrawToDataList(feature1: Feature, cbThis: any) {
     const datas: IEventInfo[] = [{
-      year: '待輸入',
-      town: '待輸入',
-      roadName: '待輸入',
+      year: '未輸入',
+      town: '未輸入',
+      roadName: '未輸入',
       roadLength: '0',
       feature: feature1,
       squad: (cbThis.selectedSquad + 1).toString(),
@@ -171,6 +178,7 @@ export interface ITaskDatas {
 export interface ITaskInfo {
   year?: string;
   town?: string;
+  townText?: string;
   squad?: string;
 }
 export interface IOlFeature {
@@ -194,7 +202,7 @@ export interface ITown {
 
 export const ColumnTitle: IEventInfo = {
   year: '日期',
-  town: '行政區',
+  townText: '行政區',
   roadName: '道路名稱',
   roadLength: '道路長度(公尺)'
 }
