@@ -9,7 +9,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { EventsInTaskComponent } from './events-in-task/events-in-task.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { BackstageService } from './backstage.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     BackstageRoutingModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     NgMaterialModule,
     OlModule
   ],

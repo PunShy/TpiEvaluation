@@ -13,8 +13,17 @@ export class BackstageService {
     return this.httpSer.getData();
   }
 
-  saveData(data: any){
-
+  getEvent(){
+    this.httpSer.webapiUrl('Events');
+    return this.httpSer.getData();
+  }
+  saveEvent(data: any){
+    this.httpSer.webapiUrl('Events');
+    return this.httpSer.postData(data);
+  }
+  deleteEvent(id: string){
+    this.httpSer.webapiUrl('Events');
+    return this.httpSer.deleteData(id);
   }
 
 }

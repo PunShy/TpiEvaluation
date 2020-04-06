@@ -2,11 +2,12 @@
 <Schema Namespace="TpiEvaluationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Event">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="TaskId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Sort" Type="int" />
+    <Property Name="TownId" Type="varchar" MaxLength="10" />
     <Property Name="RoadName" Type="nvarchar" MaxLength="50" />
     <Property Name="RoadStart" Type="nvarchar" MaxLength="50" />
     <Property Name="RoadEnd" Type="nvarchar" MaxLength="50" />
@@ -26,9 +27,9 @@
   </EntityType>
   <EntityType Name="EventImages">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EventId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Sort" Type="int" />
     <Property Name="Path" Type="nchar" MaxLength="10" />
@@ -49,7 +50,6 @@
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Year2" Type="date" />
     <Property Name="SquadId" Type="int" />
-    <Property Name="TownId" Type="int" />
     <Property Name="EventCount" Type="int" />
   </EntityType>
   <EntityType Name="Town">

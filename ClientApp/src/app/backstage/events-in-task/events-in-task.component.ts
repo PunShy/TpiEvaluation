@@ -62,7 +62,7 @@ export class EventsInTaskComponent implements OnInit, OnChanges {
 
 
   // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay = ['year', 'townText', 'roadName', 'roadLength', 'delete'];
+  columnsToDisplay = ['year', 'townText', 'RoadName', 'RoadLength', 'delete'];
 
   isimgUploadOpen = false;
 
@@ -79,18 +79,18 @@ export class EventsInTaskComponent implements OnInit, OnChanges {
   changeTownText() {
     this.dataSource.forEach(item => {
       const temp = this.towns.filter(town1 => {
-        return item.town === town1.Id;
+        return item.TownId === town1.Id;
       })[0];
       if (!!temp) {
         item.townText = temp.TownText;
       } else {
-        item.townText = item.town;
+        item.townText = item.TownId;
       }
     })
   }
 
   closeDatepicker(date, element: IEventInfo) {
-    element.year = moment(date.value).format('YYYY/MM/DD');
+    element.year = moment(date.value).format('YYYY-MM-DD');
   }
 
   switchOpen(eve: MouseEvent, element) {

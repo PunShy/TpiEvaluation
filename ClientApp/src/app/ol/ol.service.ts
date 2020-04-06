@@ -11,6 +11,7 @@ import Geometry from 'ol/geom/Geometry';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Feature } from 'ol';
 import BaseLayer from 'ol/layer/Base';
+import LineString from 'ol/geom/LineString';
 
 @Injectable()
 export class OlService {
@@ -65,6 +66,11 @@ export class OlService {
   addFeature(feature: Feature) {
     this.drawSource.addFeature(feature);
   }
+  createLineFeature(line :string[][]) {
+    const line1: number[][] = [[parseFloat(line[0][0]), parseFloat(line[0][1])], [parseFloat(line[1][0]), parseFloat(line[1][1])]];
+    const lineFeature = new Feature(new LineString(line1));
+    return lineFeature;
+  }
 
   private reomveInteractions() {
     this.olMap.removeInteraction(this.draw);
@@ -87,6 +93,7 @@ export class OlService {
     this.olMap.addInteraction(this.draw);
 
 
+    // 下面為 方便解析OL的規劃邏輯用
     window.document['draw'] = this.draw;
     // document.draw.removeLastPoint()
     // document.draw.finishDrawing()

@@ -44,7 +44,7 @@ namespace CpcBaseProject.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != eventImages.id)
+            if (id != eventImages.Id)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace CpcBaseProject.Controllers
             db.EventImages.Add(eventImages);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = eventImages.id }, eventImages);
+            return CreatedAtRoute("DefaultApi", new { id = eventImages.Id }, eventImages);
         }
 
         // DELETE: api/EventImages/5
@@ -112,7 +112,7 @@ namespace CpcBaseProject.Controllers
 
         private bool EventImagesExists(int id)
         {
-            return db.EventImages.Count(e => e.id == id) > 0;
+            return db.EventImages.Count(e => e.Id == id) > 0;
         }
     }
 }

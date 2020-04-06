@@ -14,7 +14,7 @@ namespace CpcBaseProject.Models
     
     public partial class EventImages
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public System.Guid EventId { get; set; }
         public Nullable<int> Sort { get; set; }
         public string Path { get; set; }

@@ -5,6 +5,8 @@ import { OlService } from 'src/app/ol/ol.service';
 import { Feature } from 'ol';
 import { BackstageService } from '../backstage.service';
 import { fromEvent } from 'rxjs';
+import LineString from 'ol/geom/LineString';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -30,25 +32,58 @@ export class EditorMapComponent implements OnInit {
   constructor(public olSer: OlService, private backstageSer: BackstageService) {
     this.backstageSer.getTown().subscribe((res: ITown[]) => {
       this.towns = res;
-      this.changeTowns(this.selectedSquad);
+      this.changeTowns(this.selectedSquad + 1);
     });
+    this.backstageSer.getEvent().subscribe((res: IEventInfo[]) => {
+      this.dataSource = {
+        data1: this.filterEvents(res, 1),
+        data2: this.filterEvents(res, 2),
+        data3: this.filterEvents(res, 3),
+        data4: this.filterEvents(res, 4),
+        data5: this.filterEvents(res, 5),
+        data6: this.filterEvents(res, 6),
+      };
+      this.olViewChange();
+    }, err => {
+
+    });
+  }
+  filterEvents(res: IEventInfo[], squadId: number): IEventInfo[] {
+    const datas = res.filter(event => {
+      return event.squadId === squadId;
+    });
+    datas.forEach(a => {
+      this.transformFeature(a);
+      this.transformYear(a);
+    });
+    return datas;
+  }
+  transformFeature(event1: IEventInfo): IEventInfo {
+    event1.feature = this.olSer.createLineFeature([[event1.StartX, event1.StartY], [event1.EndX, event1.EndY]]);
+    return event1;
+  }
+  transformYear(event1: IEventInfo): IEventInfo {
+    if (!!event1.year) {
+      event1.yearInput = new FormControl(new Date(event1.year));
+    } else {
+      event1.yearInput = new FormControl(Date.now);
+    }
+    return event1;
   }
 
   ngOnInit(): void {
     this.dataTitle = ColumnTitle;
-    this.dataSource = {
-      data1: [],
-      data2: [],
-      data3: [],
-      data4: [],
-      data5: [],
-      data6: []
-    };
-
-
+    if (!this.dataSource) {
+      this.dataSource = {
+        data1: [],
+        data2: [],
+        data3: [],
+        data4: [],
+        data5: [],
+        data6: []
+      };
+    }
     this.drawInit();
-
-
   }
 
   selectedChange(target: HTMLElement) {
@@ -70,11 +105,22 @@ export class EditorMapComponent implements OnInit {
     });
   }
 
-  goSubmit(val: IEventInfo){
-    const data = {
+  goSubmit(val: IEventInfo) {
+    const datas = Object.assign({}, val);
+    const coordinates1 = (val.feature.getGeometry() as LineString).getCoordinates();
+    datas.StartX = coordinates1[0][0].toString();
+    datas.StartY = coordinates1[0][1].toString();
+    datas.EndX = coordinates1[1][0].toString();
+    datas.EndY = coordinates1[1][1].toString();
+    datas.squadId = this.selectedSquad + 1;
+    datas.feature = null;
 
-    };
-    this.backstageSer.saveData(data);
+    this.backstageSer.saveEvent(datas).subscribe((res: IEventInfo) => {
+      val.Id = res.Id;
+      val.TaskId = res.TaskId;
+    }, err => {
+
+    });
   }
 
   reomveDrawFromDataList(val: IEventInfo) {
@@ -83,19 +129,30 @@ export class EditorMapComponent implements OnInit {
       return item !== val;
     });
     this.olSer.deleteFeature(val.feature);
+
+    if (!!val.Id) {
+      this.backstageSer.deleteEvent(val.Id).subscribe(res => {
+        console.log(res);
+      }, err => {
+
+      });
+    }
   }
   addDrawToDataList(feature1: Feature, cbThis: any) {
-    const datas: IEventInfo[] = [{
-      year: '未輸入',
-      town: '未輸入',
-      roadName: '未輸入',
-      roadLength: '0',
-      feature: feature1,
-      squad: (cbThis.selectedSquad + 1).toString(),
-    }];
     const target = cbThis as EditorMapComponent;
     const selTab = target.getSelectedTab();
-    target.dataSource[selTab] = target.dataSource[selTab].concat(datas);
+    const targetTab = target.dataSource[selTab];
+    const datas: IEventInfo[] = [{
+      Sort: targetTab.length,
+      year: new Date().toISOString().substring(0, 10),
+      TownId: '未輸入',
+      RoadName: '未輸入',
+      RoadLength: '0',
+      feature: feature1,
+      squadId: (cbThis.selectedSquad + 1).toString(),
+    }];
+    cbThis.transformYear(datas[0]);
+    target.dataSource[selTab] = targetTab.concat(datas);
   }
   drawLine(target: HTMLElement) {
     this.selectedChange(target);
@@ -154,10 +211,10 @@ export class EditorMapComponent implements OnInit {
 
   changeTowns(val: number) {
     this.selTowns = this.towns.filter(item => {
-      return item.SquadId === (val + 1);
+      return item.SquadId === val;
     });
   }
-  olViewChange(val: number) {
+  olViewChange() {
     this.olSer.clearView();
     const selTab = this.getSelectedTab();
     this.dataSource[selTab].forEach(d => {
@@ -177,22 +234,31 @@ export interface ITaskDatas {
 
 export interface ITaskInfo {
   year?: string;
-  town?: string;
+  yearInput?: any;
+  TownId?: string;
   townText?: string;
-  squad?: string;
+  squadId?: number;
 }
 export interface IOlFeature {
   feature?: Feature;
 }
 export interface IEventInfo extends ITaskInfo, IOlFeature {
-  roadName?: string;
-  roadLength?: string;
-  roadStart?: string;
-  roadEnd?: string;
-  roadWidth?: string;
-  sidewalkStart?: string;
-  sidewalkLength?: string;
-  memo?: string;
+  Id?: string;
+  TaskId?: string;
+  Sort?: number;
+  RoadName?: string;
+  RoadLength?: string;
+  RoadStart?: string;
+  RoadEnd?: string;
+  RoadWidth?: string;
+  SidewalkStart?: string;
+  SidewalkEnd?: string;
+  SidewalkLength?: string;
+  Memo?: string;
+  StartX?: string;
+  StartY?: string;
+  EndX?: string;
+  EndY?: string;
 }
 export interface ITown {
   Id: string;
@@ -203,8 +269,8 @@ export interface ITown {
 export const ColumnTitle: IEventInfo = {
   year: '日期',
   townText: '行政區',
-  roadName: '道路名稱',
-  roadLength: '道路長度(公尺)'
+  RoadName: '道路名稱',
+  RoadLength: '道路長度(公尺)'
 }
 
 // export const townName: { id: string, name: string }[] = [

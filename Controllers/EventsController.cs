@@ -12,16 +12,27 @@ using CpcBaseProject.Models;
 
 namespace CpcBaseProject.Controllers
 {
+    [RoutePrefix("api/Events")]
     public class EventsController : ApiController
     {
         private TpiEvaluationEntities db = new TpiEvaluationEntities();
-       
+
+        [Route("")]
+        [HttpGet]
         // GET: api/Events
-        public IQueryable<Event> GetEvent()
+        public IEnumerable<Event> GetEvent()
         {
-            return db.Event;
+            IEnumerable<Event> eventList = db.Event.ToList();
+            foreach (var event1 in eventList)
+            {
+                event1.squadId = event1.Task.SquadId.Value;
+                event1.year = event1.Task.Year2.Value.ToString("yyyy-MM-dd");
+            }
+            return eventList;
         }
 
+        [Route("{id}")]
+        [HttpGet]
         // GET: api/Events/5
         [ResponseType(typeof(Event))]
         public IHttpActionResult GetEvent(Guid id)
@@ -35,6 +46,8 @@ namespace CpcBaseProject.Controllers
             return Ok(@event);
         }
 
+        [Route("{id}", Name = "EventModify")]
+        [HttpPut]
         // PUT: api/Events/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutEvent(Guid id, Event @event)
@@ -44,7 +57,7 @@ namespace CpcBaseProject.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.id)
+            if (id != @event.Id)
             {
                 return BadRequest();
             }
@@ -70,6 +83,8 @@ namespace CpcBaseProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Route("")]
+        [HttpPost]
         // POST: api/Events
         [ResponseType(typeof(Event))]
         public IHttpActionResult PostEvent(Event @event)
@@ -78,8 +93,36 @@ namespace CpcBaseProject.Controllers
             {
                 return BadRequest(ModelState);
             }
+            int eventExist = db.Event.Where(a => a.Id == @event.Id).Count();
+            if(eventExist == 0)
+            {
+                DateTime dt1 = DateTime.Parse(@event.year);
+                var task = db.Task.Where(a => a.Year == dt1.Year.ToString() && a.SquadId == @event.squadId).FirstOrDefault();
+                Guid taskGuid1;
+                if (task == null)
+                {
+                    taskGuid1 = Guid.NewGuid();
+                    db.Task.Add(new Task
+                    {
+                        Id = taskGuid1,
+                        Year = dt1.Year.ToString(),
+                        Year2 = dt1,
+                        SquadId = @event.squadId,
+                    });
+                }
+                else
+                {
+                    taskGuid1 = task.Id;
+                }
+                @event.Id = Guid.NewGuid();
+                @event.TaskId = taskGuid1;
 
-            db.Event.Add(@event);
+                @event = db.Event.Add(@event);
+            }
+            else
+            {
+                db.Entry(@event).State = EntityState.Modified;
+            }
 
             try
             {
@@ -87,7 +130,7 @@ namespace CpcBaseProject.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EventExists(@event.id))
+                if (EventExists(@event.Id))
                 {
                     return Conflict();
                 }
@@ -97,9 +140,11 @@ namespace CpcBaseProject.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = @event.id }, @event);
+            return CreatedAtRoute("EventModify", new { id = @event.Id }, @event);
         }
 
+        [Route("{id}")]
+        [HttpDelete]
         // DELETE: api/Events/5
         [ResponseType(typeof(Event))]
         public IHttpActionResult DeleteEvent(Guid id)
@@ -109,12 +154,8 @@ namespace CpcBaseProject.Controllers
             {
                 return NotFound();
             }
-            IEnumerable<EventImages> eiList = @event.EventImages.Select(a => a).ToList();
-            if (eiList.Count() == 0)
-            {
-                return NotFound();
-            }
-
+            IEnumerable<EventImages> eiList = db.EventImages.Where(a => a.EventId == id).ToList();
+           
             db.Event.Remove(@event);
             db.EventImages.RemoveRange(eiList);
             db.SaveChanges();
@@ -133,7 +174,7 @@ namespace CpcBaseProject.Controllers
 
         private bool EventExists(Guid id)
         {
-            return db.Event.Count(e => e.id == id) > 0;
+            return db.Event.Count(e => e.Id == id) > 0;
         }
     }
 }

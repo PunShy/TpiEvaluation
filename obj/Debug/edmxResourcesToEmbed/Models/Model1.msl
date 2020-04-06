@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Event">
       <EntityTypeMapping TypeName="TpiEvaluationModel.Event">
         <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="TownId" ColumnName="TownId" />
           <ScalarProperty Name="Polygon" ColumnName="Polygon" />
           <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
           <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
@@ -22,7 +23,7 @@
           <ScalarProperty Name="RoadName" ColumnName="RoadName" />
           <ScalarProperty Name="Sort" ColumnName="Sort" />
           <ScalarProperty Name="TaskId" ColumnName="TaskId" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,7 +34,7 @@
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Sort" ColumnName="Sort" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -49,7 +50,6 @@
       <EntityTypeMapping TypeName="TpiEvaluationModel.Task">
         <MappingFragment StoreEntitySet="Task">
           <ScalarProperty Name="EventCount" ColumnName="EventCount" />
-          <ScalarProperty Name="TownId" ColumnName="TownId" />
           <ScalarProperty Name="SquadId" ColumnName="SquadId" />
           <ScalarProperty Name="Year2" ColumnName="Year2" />
           <ScalarProperty Name="Year" ColumnName="Year" />

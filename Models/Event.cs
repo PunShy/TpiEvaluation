@@ -20,7 +20,7 @@ namespace CpcBaseProject.Models
             this.EventImages = new HashSet<EventImages>();
         }
     
-        public System.Guid id { get; set; }
+        public System.Guid Id { get; set; }
         public System.Guid TaskId { get; set; }
         public Nullable<int> Sort { get; set; }
         public string RoadName { get; set; }
@@ -39,9 +39,10 @@ namespace CpcBaseProject.Models
         public System.Data.Entity.Spatial.DbGeometry StartPoint { get; set; }
         public System.Data.Entity.Spatial.DbGeometry EndPoint { get; set; }
         public System.Data.Entity.Spatial.DbGeometry Polygon { get; set; }
+        public string TownId { get; set; }
     
+        public virtual Task Task { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventImages> EventImages { get; set; }
-        public virtual Task Task { get; set; }
     }
 }

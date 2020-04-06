@@ -56,7 +56,7 @@
 
 
       <div data-scroll="true">
-        <mat-tab-group [(selectedIndex)]="selectedSquad" (selectedIndexChange)="changeTowns($event);olViewChange($event);">
+        <mat-tab-group [(selectedIndex)]="selectedSquad" (selectedIndexChange)="changeTowns($event+1);olViewChange();">
           <mat-tab label="一分隊" >
             <app-events-in-task #tTab1 [squad]="selectedSquad" [dataTitle]="dataTitle"
                (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
@@ -65,27 +65,32 @@
           </mat-tab>
           <mat-tab label="二分隊" >
             <app-events-in-task #tTab2 [squad]="selectedSquad" [dataTitle]="dataTitle"
-             (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+             (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+             [towns]="selTowns"
              [dataSource]="dataSource.data2"></app-events-in-task>
           </mat-tab>
           <mat-tab label="三分隊" >
             <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
-            (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+            (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+            [towns]="selTowns"
             [dataSource]="dataSource.data3"></app-events-in-task>
           </mat-tab>
           <mat-tab label="四分隊" >
             <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
-            (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+            (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+            [towns]="selTowns"
             [dataSource]="dataSource.data4"></app-events-in-task>
           </mat-tab>
           <mat-tab label="五分隊" >
             <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
-            (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+            (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+            [towns]="selTowns"
             [dataSource]="dataSource.data5"></app-events-in-task>
           </mat-tab>
           <mat-tab label="六分隊" >
             <app-events-in-task [squad]="selectedSquad" [dataTitle]="dataTitle"
-            (delete)="reomveDrawFromDataList($event)" [towns]="selTowns"
+            (delete)="reomveDrawFromDataList($event)" (goSubmit)="goSubmit($event)"
+            [towns]="selTowns"
             [dataSource]="dataSource.data6"></app-events-in-task>
           </mat-tab>
         </mat-tab-group>
