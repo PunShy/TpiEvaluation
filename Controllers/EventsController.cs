@@ -26,7 +26,8 @@ namespace CpcBaseProject.Controllers
             foreach (var event1 in eventList)
             {
                 event1.squadId = event1.Task.SquadId.Value;
-                event1.year = event1.Task.Year2.Value.ToString("yyyy-MM-dd");
+                event1.year = event1.Task.Year;
+                event1.year2 = event1.Task.Year2.Value.ToString("yyyy-MM-dd");
             }
             return eventList;
         }
@@ -93,10 +94,10 @@ namespace CpcBaseProject.Controllers
             {
                 return BadRequest(ModelState);
             }
+            DateTime dt1 = DateTime.Parse(@event.year2);
             int eventExist = db.Event.Where(a => a.Id == @event.Id).Count();
-            if(eventExist == 0)
+            if (eventExist == 0)
             {
-                DateTime dt1 = DateTime.Parse(@event.year);
                 var task = db.Task.Where(a => a.Year == dt1.Year.ToString() && a.SquadId == @event.squadId).FirstOrDefault();
                 Guid taskGuid1;
                 if (task == null)
@@ -121,6 +122,9 @@ namespace CpcBaseProject.Controllers
             }
             else
             {
+                Task task = db.Task.Where(a => a.Id == @event.TaskId).FirstOrDefault();
+                task.Year = @event.year;
+                task.Year2 = dt1;
                 db.Entry(@event).State = EntityState.Modified;
             }
 

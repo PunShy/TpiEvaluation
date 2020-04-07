@@ -1,3 +1,28 @@
 <div>
-  <mat-slide-toggle>開啟熱區圖</mat-slide-toggle>
+  <span>
+    <mat-form-field>
+      <mat-label>年份</mat-label>
+      <mat-select (selectionChange)="selectEventOfYear($event)">
+        <mat-option value="">請選擇</mat-option>
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+  <span class="margin-left">
+    <mat-form-field>
+      <mat-label>分隊</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let squad of squads" [value]="squad.value">
+          {{squad.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+
+
+  <span class="margin-left">
+    <mat-slide-toggle (change)="slideChnage($event)">開啟熱區圖</mat-slide-toggle>
+  </span>
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { Draw, Modify, Snap } from 'ol/interaction';
-import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
+import { Tile as TileLayer, Vector as VectorLayer, Heatmap as HeatmapLayer } from 'ol/layer';
 import { OSM, Vector as VectorSource } from 'ol/source';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 import { transform } from 'ol/proj';
@@ -57,16 +57,16 @@ export class OlService {
     }
   }
 
-  clearView() {
+  clearDeawView() {
     this.drawSource.clear();
   }
-  deleteFeature(feature: Feature) {
+  deleteDrawFeature(feature: Feature) {
     this.drawSource.removeFeature(feature);
   }
-  addFeature(feature: Feature) {
+  addDrawFeature(feature: Feature) {
     this.drawSource.addFeature(feature);
   }
-  createLineFeature(line :string[][]) {
+  createLineFeature(line: string[][]) {
     const line1: number[][] = [[parseFloat(line[0][0]), parseFloat(line[0][1])], [parseFloat(line[1][0]), parseFloat(line[1][1])]];
     const lineFeature = new Feature(new LineString(line1));
     return lineFeature;
@@ -132,6 +132,19 @@ export class OlService {
       })
     });
     return vector;
+  }
+
+  private createHeatmapLayer(source: VectorSource<Geometry>) {
+    const vector = new HeatmapLayer({
+      source,
+      blur: 10,// parseInt(blur.value, 10),
+      radius: 10,// parseInt(radius.value, 10),
+      weight: (feature) => {
+        const name = feature.get('name');
+        const magnitude = parseFloat(name.substr(2));
+        return magnitude - 5;
+      }
+    });
   }
 
 }

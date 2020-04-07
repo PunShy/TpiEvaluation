@@ -62,7 +62,7 @@ export class EditorMapComponent implements OnInit {
   }
   transformYear(event1: IEventInfo): IEventInfo {
     if (!!event1.year) {
-      event1.yearInput = new FormControl(new Date(event1.year));
+      event1.yearInput = new FormControl(new Date(event1.year2));
     } else {
       event1.yearInput = new FormControl(Date.now);
     }
@@ -130,7 +130,7 @@ export class EditorMapComponent implements OnInit {
     this.dataSource[selTab] = this.dataSource[selTab].filter(item => {
       return item !== val;
     });
-    this.olSer.deleteFeature(val.feature);
+    this.olSer.deleteDrawFeature(val.feature);
 
     if (!!val.Id) {
       this.backstageSer.deleteEvent(val.Id).subscribe(res => {
@@ -195,7 +195,7 @@ export class EditorMapComponent implements OnInit {
       this.changeTowns(this.selectedSquad + 1);
       this.olViewChange();
     } else {
-      this.olSer.clearView();
+      this.olSer.clearDeawView();
     }
   }
 
@@ -228,11 +228,11 @@ export class EditorMapComponent implements OnInit {
     });
   }
   olViewChange() {
-    this.olSer.clearView();
+    this.olSer.clearDeawView();
     const selTab = this.getSelectedTab();
     if (!!selTab) {
       this.dataSource[selTab].forEach(d => {
-        this.olSer.addFeature(d.feature);
+        this.olSer.addDrawFeature(d.feature);
       });
     }
   }
@@ -249,6 +249,7 @@ export interface ITaskDatas {
 
 export interface ITaskInfo {
   year?: string;
+  year2?: any;
   yearInput?: any;
   TownId?: string;
   townText?: string;

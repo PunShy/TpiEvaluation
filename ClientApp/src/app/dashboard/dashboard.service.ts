@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpService } from '../http.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DashboardService {
 
-  constructor() { }
+  constructor(private httpSer: HttpService) { }
+
+
+  getEvent() {
+    this.httpSer.webapiUrl('Events');
+    return this.httpSer.getData();
+  }
 }

@@ -12,6 +12,7 @@ namespace CpcBaseProject.Models
     public partial class Event
     {
         public string year { set; get; }
+        public string year2 { set; get; }
         public int squadId { set; get; }
 
         public void AddEvent(DbContext db)

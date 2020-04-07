@@ -38,7 +38,7 @@
                     <mat-form-field>
                       <mat-label>選擇日期</mat-label>
                       <input matInput [matDatepicker]="picker" required disabled [formControl]="element.yearInput"
-                        (dateChange)="closeDatepicker($event, element)" name="year">
+                        (dateChange)="closeDatepicker($event, element)" name="year2">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker disabled="false"></mat-datepicker>
                     </mat-form-field>

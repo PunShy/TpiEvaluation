@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { OlModule } from '../ol/ol.module';
 import { MenuToolsComponent } from './menu-tools/menu-tools.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { DashboardService } from './dashboard.service';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
     DashboardRoutingModule,
     NgMaterialModule,
     OlModule
-  ]
+  ],
+  providers: [DashboardService]
 })
 export class DashboardModule { }

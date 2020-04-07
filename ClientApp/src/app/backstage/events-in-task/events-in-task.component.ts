@@ -61,7 +61,7 @@ export class EventsInTaskComponent implements OnInit, OnChanges {
 
 
   // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay = ['year', 'townText', 'RoadName', 'RoadLength', 'delete'];
+  columnsToDisplay = ['year2', 'townText', 'RoadName', 'RoadLength', 'delete'];
 
   isimgUploadOpen = false;
 
@@ -89,7 +89,7 @@ export class EventsInTaskComponent implements OnInit, OnChanges {
   }
 
   closeDatepicker(date, element: IEventInfo) {
-    element.year = moment(date.value).format('YYYY-MM-DD');
+    element.year2 = moment(date.value).format('YYYY-MM-DD');
   }
 
   switchOpen(eve: MouseEvent, element) {

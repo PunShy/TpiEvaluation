@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { OlService } from '../ol/ol.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +9,8 @@ import { OlService } from '../ol/ol.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(appSer: AppService, public olSer: OlService) {
+  constructor(appSer: AppService) {
+
   }
 
   ngOnInit(): void {
