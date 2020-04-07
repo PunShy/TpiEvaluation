@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { Draw, Modify, Snap } from 'ol/interaction';
@@ -16,14 +16,22 @@ import { OlService } from '../ol.service';
   templateUrl: './ol-base.component.html',
   styleUrls: ['./ol-base.component.scss']
 })
-export class OlBaseComponent implements OnInit {
+export class OlBaseComponent implements OnInit, AfterViewInit {
+  @Input()
+  mapId = '';
+
+  @ViewChild('tMap')
+  mapElement: ElementRef ;
 
   constructor(public olDrawSer: OlService) {
+    this.olDrawSer.olMap = this.createMap();
+    window.document['map'] = this.olDrawSer.olMap;
   }
 
   ngOnInit(): void {
-    this.olDrawSer.olMap = this.createMap();
-    window.document['map'] = this.olDrawSer.olMap;
+  }
+  ngAfterViewInit(): void {
+    this.olDrawSer.olMap.setTarget(this.mapElement.nativeElement)
   }
 
   createMap() {
@@ -36,7 +44,7 @@ export class OlBaseComponent implements OnInit {
     const dataSetPoint = [dataX, dataY]; // transform([dataX, dataY], 'EPSG:4326', 'EPSG:3857');
     const map = new Map({
       layers: [raster],// , vector],
-      target: 'map',
+      // target: this.mapId,
       view: new View({
         projection: 'EPSG:4326',
         center: dataSetPoint,

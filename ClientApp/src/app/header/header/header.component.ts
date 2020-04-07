@@ -16,19 +16,27 @@ export class HeaderComponent implements OnInit {
         { label: '編輯資料', routers: ['/backstage'] }
       ]
     },
-    {
-      home: '測試連結2', links: [
-        { label: '內容物2-1', routers: ['/dashboard'] },
-        { label: '內容物2-2', routers: ['/backstage'] }
-      ]
-    }
+    // {
+    //   home: '測試連結2', links: [
+    //     { label: '內容物2-1', routers: ['/內容物2-1'] },
+    //     { label: '內容物2-2', routers: ['/內容物2-2'] }
+    //   ]
+    // }
   ];
 
   constructor(public appSer: AppService, public router: Router) {
-    this.setBreadcrumbs(this.headerLinks[0].home, this.headerLinks[0].links[1]);
   }
 
   ngOnInit(): void {
+    this.headerLinks.forEach(item => {
+      item.links.forEach(a => {
+        a.routers.forEach(b => {
+          if (b.indexOf(window.location.pathname) >= 0) {
+            this.setBreadcrumbs(item.home, a);
+          }
+        });
+      });
+    });
   }
 
   goLink(home: string, routers: ILinkInfo) {
@@ -37,7 +45,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(routers.routers);
   }
 
-  setBreadcrumbs(home: string, routers: ILinkInfo){
+  setBreadcrumbs(home: string, routers: ILinkInfo) {
     this.appSer.ibl.home = home;
     this.appSer.ibl.links = [routers];
   }

@@ -4,9 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BackstageComponent } from './backstage.component';
 import { EditorMapComponent } from './editor-map/editor-map.component';
 
-const routes: Routes = [{ path: '', component: BackstageComponent,
+const routes: Routes = [{
+  path: '', component: BackstageComponent,
   children: [
-    {path: '', component: EditorMapComponent}
+    { path: '', component: EditorMapComponent }
   ]
 }];
 

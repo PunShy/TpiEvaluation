@@ -26,7 +26,7 @@
     <div class="kt-header__topbar-item ">
       <!--begin: 控制台開關 -->
       <button type="button" class="btn btn-brand btn-elevate btn-pill btn-elevate-air editorBtn"
-        (click)="isShowEditor=!isShowEditor">
+        (click)="editorOpenClose()">
         <i class="fa fa-edit"></i>編輯視窗</button>
 
       <!--end: 控制台開關 -->
@@ -43,7 +43,7 @@
     <h3 class="kt-offcanvas-panel__title">
       編輯視窗
     </h3>
-    <a class="kt-offcanvas-panel__close" id="kt_offcanvas_toolbar_search_close" (click)="isShowEditor=!isShowEditor"><i
+    <a class="kt-offcanvas-panel__close" id="kt_offcanvas_toolbar_search_close" (click)="editorOpenClose()"><i
         class="flaticon2-delete"></i></a>
   </div>
   <div class="kt-offcanvas-panel__body">

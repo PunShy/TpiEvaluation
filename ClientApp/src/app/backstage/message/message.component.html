@@ -1,0 +1,10 @@
+<h2>{{data.title}}</h2>
+<label class="error" *ngIf="!!data.error">
+  {{data.error}}
+</label>
+<label class="success" *ngIf="!!data.success">
+  {{data.success}}
+</label>
+<label class="message" *ngIf="!!data.message">
+  {{data.message}}
+</label>

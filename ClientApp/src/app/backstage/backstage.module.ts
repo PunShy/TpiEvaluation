@@ -10,10 +10,11 @@ import { EventsInTaskComponent } from './events-in-task/events-in-task.component
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { BackstageService } from './backstage.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
-  declarations: [BackstageComponent, EditorMapComponent, AddTaskComponent, EventsInTaskComponent, ],
+  declarations: [BackstageComponent, EditorMapComponent, AddTaskComponent, EventsInTaskComponent, MessageComponent, ],
   imports: [
     CommonModule,
     BackstageRoutingModule,

@@ -23,7 +23,7 @@ export class EditorMapComponent implements OnInit {
 
   dataSource: ITaskDatas;
 
-  isShowEditor = true;
+  isShowEditor = false;
 
   olMapDrawInit = false;
   towns: ITown[] = [];
@@ -32,7 +32,6 @@ export class EditorMapComponent implements OnInit {
   constructor(public olSer: OlService, private backstageSer: BackstageService) {
     this.backstageSer.getTown().subscribe((res: ITown[]) => {
       this.towns = res;
-      this.changeTowns(this.selectedSquad + 1);
     });
     this.backstageSer.getEvent().subscribe((res: IEventInfo[]) => {
       this.dataSource = {
@@ -43,7 +42,6 @@ export class EditorMapComponent implements OnInit {
         data5: this.filterEvents(res, 5),
         data6: this.filterEvents(res, 6),
       };
-      this.olViewChange();
     }, err => {
 
     });
@@ -114,12 +112,16 @@ export class EditorMapComponent implements OnInit {
     datas.EndY = coordinates1[1][1].toString();
     datas.squadId = this.selectedSquad + 1;
     datas.feature = null;
+    datas.yearInput = null;
+
 
     this.backstageSer.saveEvent(datas).subscribe((res: IEventInfo) => {
       val.Id = res.Id;
       val.TaskId = res.TaskId;
-    }, err => {
 
+      this.backstageSer.showMessage({ title: '訊息', success: '儲存成功' }, 5);
+    }, err => {
+      this.backstageSer.showMessage({ title: '訊息', error: '儲存失敗' }, 5);
     });
   }
 
@@ -186,6 +188,17 @@ export class EditorMapComponent implements OnInit {
     return true;
   }
 
+  editorOpenClose() {
+    this.isShowEditor = !this.isShowEditor;
+    if (this.isShowEditor) {
+      this.selectedSquad = 0;
+      this.changeTowns(this.selectedSquad + 1);
+      this.olViewChange();
+    } else {
+      this.olSer.clearView();
+    }
+  }
+
   public getSelectedTab() {
     switch (this.selectedSquad) {// delete List data
       case 0:
@@ -217,9 +230,11 @@ export class EditorMapComponent implements OnInit {
   olViewChange() {
     this.olSer.clearView();
     const selTab = this.getSelectedTab();
-    this.dataSource[selTab].forEach(d => {
-      this.olSer.addFeature(d.feature);
-    });
+    if (!!selTab) {
+      this.dataSource[selTab].forEach(d => {
+        this.olSer.addFeature(d.feature);
+      });
+    }
   }
 }
 

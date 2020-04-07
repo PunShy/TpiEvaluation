@@ -1,6 +1,5 @@
 import {
-  Component, OnInit, OnChanges, Input, ViewChild, ElementRef, AfterViewChecked, AfterViewInit,
-  AfterContentInit, AfterContentChecked, OnDestroy, DoCheck, Output, EventEmitter, SimpleChanges
+  Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { IEventInfo, ITown } from '../editor-map/editor-map.component';
