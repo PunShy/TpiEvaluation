@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TpiEvaluationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TaskId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="TownId" Type="varchar" MaxLength="10" />
+    <Property Name="RoadName" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoadStart" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoadEnd" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoadLength" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="RoadWidth" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="SidewalkStart" Type="nvarchar" MaxLength="50" />
+    <Property Name="SidewalkEnd" Type="nvarchar" MaxLength="50" />
+    <Property Name="SidewalkLength" Type="nvarchar" MaxLength="50" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+    <Property Name="StartX" Type="varchar" MaxLength="20" />
+    <Property Name="StartY" Type="varchar" MaxLength="20" />
+    <Property Name="EndX" Type="varchar" MaxLength="20" />
+    <Property Name="EndY" Type="varchar" MaxLength="20" />
+    <Property Name="StartPoint" Type="geometry" />
+    <Property Name="EndPoint" Type="geometry" />
+    <Property Name="Polygon" Type="geometry" />
+  </EntityType>
+  <EntityType Name="EventImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Path" Type="nchar" MaxLength="10" />
+    <Property Name="Point" Type="geometry" />
+  </EntityType>
+  <EntityType Name="Squad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Year2" Type="date" />
+    <Property Name="SquadId" Type="int" />
+    <Property Name="EventCount" Type="int" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="TownText" Type="nvarchar" MaxLength="10" />
+    <Property Name="SquadId" Type="int" />
+  </EntityType>
+  <EntityContainer Name="TpiEvaluationModelStoreContainer">
+    <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventImages" EntityType="Self.EventImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Squad" EntityType="Self.Squad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

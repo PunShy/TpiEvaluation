@@ -27,8 +27,8 @@ namespace CpcBaseProject.Models
     
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventImages> EventImages { get; set; }
-        public virtual DbSet<Squad> Squad { get; set; }
         public virtual DbSet<Task> Task { get; set; }
+        public virtual DbSet<Squad> Squad { get; set; }
         public virtual DbSet<Town> Town { get; set; }
     }
 }

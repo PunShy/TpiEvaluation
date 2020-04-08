@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TpiEvaluationModelStoreContainer" CdmEntityContainer="TpiEvaluationEntities">
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="TpiEvaluationModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="TownId" ColumnName="TownId" />
+          <ScalarProperty Name="Polygon" ColumnName="Polygon" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndY" ColumnName="EndY" />
+          <ScalarProperty Name="EndX" ColumnName="EndX" />
+          <ScalarProperty Name="StartY" ColumnName="StartY" />
+          <ScalarProperty Name="StartX" ColumnName="StartX" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="SidewalkLength" ColumnName="SidewalkLength" />
+          <ScalarProperty Name="SidewalkEnd" ColumnName="SidewalkEnd" />
+          <ScalarProperty Name="SidewalkStart" ColumnName="SidewalkStart" />
+          <ScalarProperty Name="RoadWidth" ColumnName="RoadWidth" />
+          <ScalarProperty Name="RoadLength" ColumnName="RoadLength" />
+          <ScalarProperty Name="RoadEnd" ColumnName="RoadEnd" />
+          <ScalarProperty Name="RoadStart" ColumnName="RoadStart" />
+          <ScalarProperty Name="RoadName" ColumnName="RoadName" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventImages">
+      <EntityTypeMapping TypeName="TpiEvaluationModel.EventImages">
+        <MappingFragment StoreEntitySet="EventImages">
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task">
+      <EntityTypeMapping TypeName="TpiEvaluationModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="EventCount" ColumnName="EventCount" />
+          <ScalarProperty Name="SquadId" ColumnName="SquadId" />
+          <ScalarProperty Name="Year2" ColumnName="Year2" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Squad">
+      <EntityTypeMapping TypeName="TpiEvaluationModel.Squad">
+        <MappingFragment StoreEntitySet="Squad">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Town">
+      <EntityTypeMapping TypeName="TpiEvaluationModel.Town">
+        <MappingFragment StoreEntitySet="Town">
+          <ScalarProperty Name="SquadId" ColumnName="SquadId" />
+          <ScalarProperty Name="TownText" ColumnName="TownText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

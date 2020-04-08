@@ -205,25 +205,10 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularOutput\3rdpartylicenses.txt" />
-    <Content Include="AngularOutput\5-es2015.a431715f51d670f8706e.js" />
-    <Content Include="AngularOutput\5-es5.a431715f51d670f8706e.js" />
-    <Content Include="AngularOutput\6-es2015.5b8fd69e635d97cef577.js" />
-    <Content Include="AngularOutput\6-es5.5b8fd69e635d97cef577.js" />
-    <Content Include="AngularOutput\assets\imgs\logo-s-TPE.png" />
-    <Content Include="AngularOutput\index.html" />
-    <Content Include="AngularOutput\main-es2015.50c2cda9f55ad1002c5e.js" />
-    <Content Include="AngularOutput\main-es5.50c2cda9f55ad1002c5e.js" />
-    <Content Include="AngularOutput\polyfills-es2015.ca64e4516afbb1b890d5.js" />
-    <Content Include="AngularOutput\polyfills-es5.ad81c68d1c3d7a0429f1.js" />
-    <Content Include="AngularOutput\runtime-es2015.53a0816dc4a06de66dae.js" />
-    <Content Include="AngularOutput\runtime-es5.53a0816dc4a06de66dae.js" />
-    <Content Include="AngularOutput\styles.0e4338761429b4eb16ac.css" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="ClientApp\.gitignore" />
     <Content Include="ClientApp\karma.conf.js" />
     <Content Include="ClientApp\src\app\app.component.html" />
-    <Content Include="ClientApp\src\favicon.ico" />
     <Content Include="ClientApp\src\index.html" />
     <Content Include="ClientApp\tsconfig.app.json" />
     <Content Include="ClientApp\tsconfig.json" />
@@ -288,6 +273,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -456,7 +442,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53328</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53328/</IISUrl>
+          <IISUrl>http://localhost:53328/TpiEvaluation/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

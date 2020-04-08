@@ -6,7 +6,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = '/api/';// /TpiEvaluation
+  private baseUrl = './api/';
   private targetUrl;
   public webapiUrl(url: string) {
     return this.targetUrl = this.baseUrl + url;

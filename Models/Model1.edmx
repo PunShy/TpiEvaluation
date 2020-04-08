@@ -79,9 +79,7 @@
         <EntityContainer Name="TpiEvaluationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Event" EntityType="TpiEvaluationModel.Event" />
           <EntitySet Name="EventImages" EntityType="TpiEvaluationModel.EventImages" />
-          <EntitySet Name="Squad" EntityType="TpiEvaluationModel.Squad" />
           <EntitySet Name="Task" EntityType="TpiEvaluationModel.Task" />
-          <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
           <AssociationSet Name="TaskEvent" Association="TpiEvaluationModel.TaskEvent">
             <End Role="Task" EntitySet="Task" />
             <End Role="Event" EntitySet="Event" />
@@ -90,6 +88,8 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="EventImages" EntitySet="EventImages" />
           </AssociationSet>
+          <EntitySet Name="Squad" EntityType="TpiEvaluationModel.Squad" />
+          <EntitySet Name="Town" EntityType="TpiEvaluationModel.Town" />
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -129,13 +129,6 @@
           <Property Name="Point" Type="Geometry" />
           <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.EventEventImages" FromRole="EventImages" ToRole="Event" />
         </EntityType>
-        <EntityType Name="Squad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Task">
           <Key>
             <PropertyRef Name="Id" />
@@ -146,14 +139,6 @@
           <Property Name="SquadId" Type="Int32" />
           <Property Name="EventCount" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="TpiEvaluationModel.TaskEvent" FromRole="Task" ToRole="Event" />
-        </EntityType>
-        <EntityType Name="Town">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="TownText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SquadId" Type="Int32" />
         </EntityType>
         <Association Name="TaskEvent">
           <End Type="TpiEvaluationModel.Task" Role="Task" Multiplicity="1" />
@@ -179,6 +164,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Squad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TownText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SquadId" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -222,14 +222,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Squad">
-            <EntityTypeMapping TypeName="TpiEvaluationModel.Squad">
-              <MappingFragment StoreEntitySet="Squad">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="TpiEvaluationModel.Task">
               <MappingFragment StoreEntitySet="Task">
@@ -237,6 +229,14 @@
                 <ScalarProperty Name="SquadId" ColumnName="SquadId" />
                 <ScalarProperty Name="Year2" ColumnName="Year2" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Squad">
+            <EntityTypeMapping TypeName="TpiEvaluationModel.Squad">
+              <MappingFragment StoreEntitySet="Squad">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
