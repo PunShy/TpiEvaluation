@@ -61,7 +61,7 @@ export class EditorMapComponent implements OnInit {
     return event1;
   }
   transformYear(event1: IEventInfo): IEventInfo {
-    if (!!event1.year) {
+    if (!!event1.year2) {
       event1.yearInput = new FormControl(new Date(event1.year2));
     } else {
       event1.yearInput = new FormControl(Date.now);
@@ -146,7 +146,7 @@ export class EditorMapComponent implements OnInit {
     const targetTab = target.dataSource[selTab];
     const datas: IEventInfo[] = [{
       Sort: targetTab.length,
-      year: new Date().toISOString().substring(0, 10),
+      year2: moment(new Date()).format('YYYY-MM-DD'),
       TownId: '未輸入',
       RoadName: '未輸入',
       RoadLength: '0',
@@ -283,7 +283,7 @@ export interface ITown {
 }
 
 export const ColumnTitle: IEventInfo = {
-  year: '日期',
+  year2: '日期',
   townText: '行政區',
   RoadName: '道路名稱',
   RoadLength: '道路長度(公尺)'

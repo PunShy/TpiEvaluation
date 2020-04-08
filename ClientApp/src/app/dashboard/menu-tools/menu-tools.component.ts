@@ -22,6 +22,11 @@ export class MenuToolsComponent implements OnInit {
     { value: '6', text: '第六分隊' },
   ];
   eventItems: IEventInfo[];
+  showEventItems: IEventInfo[] = [];
+
+  switchYear: string;
+  switchSquad: string;
+
 
   constructor(public olSer: OlService, public dashSer: DashboardService) {
     this.dashSer.getEvent().subscribe((res: IEventInfo[]) => {
@@ -34,6 +39,7 @@ export class MenuToolsComponent implements OnInit {
 
   ngOnInit(): void {
     this.olSer.drawInit();
+    this.olSer.HeapmapInit();
   }
 
   getYears() {
@@ -43,18 +49,55 @@ export class MenuToolsComponent implements OnInit {
       return self.indexOf(year) === index;
     });
   }
-  selectEventOfYear(year: MatSelectChange) {
-    const aa = this.eventItems.filter(a => {
-      return a.year === year.value;
+  selectYearEvent() {
+    if (this.showEventItems.length === 0) {
+      this.showEventItems = this.eventItems.map(a => a);
+    }
+    this.showEventItems = this.showEventItems.filter(a => {
+      if (this.switchYear === 'ALL') {
+        return !!a.year;
+      }
+      return a.year === this.switchYear;
     });
-    aa.forEach(ele => {
+    this.makeRoadFeatures();
+  }
+  selectSquadEvent() {
+    if (this.showEventItems.length === 0) {
+      this.showEventItems = this.eventItems.map(a => a);
+    }
+    this.showEventItems = this.showEventItems.filter(a => {
+      if (this.switchSquad === 'ALL') {
+        return !!a.squadId;
+      }
+      return a.squadId.toString() === this.switchSquad;
+    });
+    this.makeRoadFeatures();
+  }
+  private makeRoadFeatures() {
+    this.olSer.clearDeawView();
+    this.showEventItems.forEach(ele => {
       ele.feature = this.olSer.createLineFeature([[ele.StartX, ele.StartY], [ele.EndX, ele.EndY]]);
       this.olSer.addDrawFeature(ele.feature);
-    });;
+    });
   }
 
-  slideChnage(val: any) {
+  private makeHeatmapFeatures() {
+    this.olSer.clearDeawView();
+    this.showEventItems.forEach(ele => {
+      const point1 = this.olSer.createPointFeature([ele.StartX, ele.StartY]);
+      this.olSer.addHeatmapFeature(point1);
+      const point2 = this.olSer.createPointFeature([ele.EndX, ele.EndY]);
+      this.olSer.addHeatmapFeature(point2);
+    });
+  }
 
+  slideHeatmapChnage(val: boolean) {
+    if (val) {
+      this.makeHeatmapFeatures();
+    } else {
+      this.olSer.clearHeatmapFeature();
+      this.makeRoadFeatures();
+    }
   }
 
 }

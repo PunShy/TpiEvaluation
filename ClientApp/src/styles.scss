@@ -45,3 +45,14 @@ $ClientApp-theme: mat-light-theme($ClientApp-primary, $ClientApp-accent, $Client
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #1cac81;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: rgba(28, 172, 129, 0.52);
+}

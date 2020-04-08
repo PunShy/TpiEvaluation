@@ -12,6 +12,7 @@ import { DrawEvent } from 'ol/interaction/Draw';
 import { Feature } from 'ol';
 import BaseLayer from 'ol/layer/Base';
 import LineString from 'ol/geom/LineString';
+import Point from 'ol/geom/Point';
 
 @Injectable()
 export class OlService {
@@ -19,11 +20,19 @@ export class OlService {
   olMap: Map;
   private modify: Modify;
   private drawSource: VectorSource<Geometry>;
+  private heatmapSource: VectorSource<Geometry>;
   private draw: Draw;
   private snap: Snap;
 
   constructor() { }
 
+  drawInit() {
+    this.drawSource = this.createDrawSource();
+    const drawLayer = this.createDrawLayer(this.drawSource);
+    this.olMap.addLayer(drawLayer);
+    // this.addInteractions(this.drawSource, 'LINE_STRING');
+
+  }
   openDraw(type: string, callBack?: (x: Feature, cbThis: any) => void, callbackThis?: any) {
     this.addInteractions(this.drawSource, type);
 
@@ -36,15 +45,6 @@ export class OlService {
   }
   closeDraw() {
     this.reomveInteractions();
-  }
-
-
-  drawInit() {
-    this.drawSource = this.createDrawSource();
-    const drawLayer = this.createDrawLayer(this.drawSource);
-    this.olMap.addLayer(drawLayer);
-    // this.addInteractions(this.drawSource, 'LINE_STRING');
-
   }
 
   modifyUse(isModify: boolean) {
@@ -70,6 +70,11 @@ export class OlService {
     const line1: number[][] = [[parseFloat(line[0][0]), parseFloat(line[0][1])], [parseFloat(line[1][0]), parseFloat(line[1][1])]];
     const lineFeature = new Feature(new LineString(line1));
     return lineFeature;
+  }
+  createPointFeature(point: string[]) {
+    const point1: number[] = [parseFloat(point[0]), parseFloat(point[1])];
+    const pointFeature = new Feature(new Point(point1));
+    return pointFeature;
   }
 
   private reomveInteractions() {
@@ -108,6 +113,12 @@ export class OlService {
   }
 
 
+  clearHeatmapFeature() {
+    this.heatmapSource.clear();
+  }
+  addHeatmapFeature(feature: Feature) {
+    this.heatmapSource.addFeature(feature);
+  }
   private createDrawSource() {
     const source: VectorSource<Geometry> = new VectorSource();
     return source;
@@ -134,17 +145,25 @@ export class OlService {
     return vector;
   }
 
+
+  HeapmapInit() {
+    this.heatmapSource = this.createDrawSource();
+    const layer = this.createHeatmapLayer(this.heatmapSource);
+    this.olMap.addLayer(layer);
+  }
   private createHeatmapLayer(source: VectorSource<Geometry>) {
-    const vector = new HeatmapLayer({
+    const layer = new HeatmapLayer({
       source,
-      blur: 10,// parseInt(blur.value, 10),
+      blur: 15,// parseInt(blur.value, 10),
       radius: 10,// parseInt(radius.value, 10),
-      weight: (feature) => {
-        const name = feature.get('name');
-        const magnitude = parseFloat(name.substr(2));
-        return magnitude - 5;
-      }
+      // weight: (feature) => {
+      //   debugger;
+      //   const name = feature.get('name');
+      //   const magnitude = parseFloat(name.substr(2));
+      //   return magnitude - 5;
+      // }
     });
+    return layer;
   }
 
 }
