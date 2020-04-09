@@ -206,13 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="ClientApp\.gitignore" />
-    <Content Include="ClientApp\karma.conf.js" />
-    <Content Include="ClientApp\src\app\app.component.html" />
-    <Content Include="ClientApp\src\index.html" />
-    <Content Include="ClientApp\tsconfig.app.json" />
-    <Content Include="ClientApp\tsconfig.json" />
-    <Content Include="ClientApp\tsconfig.spec.json" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -386,16 +379,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientApp\.editorconfig" />
-    <Content Include="ClientApp\angular.json" />
-    <Content Include="ClientApp\browserslist" />
-    <Content Include="ClientApp\package-lock.json" />
-    <Content Include="ClientApp\package.json" />
-    <Content Include="ClientApp\README.md" />
-    <Content Include="ClientApp\src\app\app.component.scss" />
-    <Content Include="ClientApp\src\assets\.gitkeep" />
-    <Content Include="ClientApp\src\styles.scss" />
-    <Content Include="ClientApp\proxy.config.json" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -408,15 +391,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\app.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\app.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="ClientApp\src\environments\environment.ts" />
-    <TypeScriptCompile Include="ClientApp\src\main.ts" />
-    <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
-    <TypeScriptCompile Include="ClientApp\src\test.ts" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
