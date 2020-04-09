@@ -1,7 +1,19 @@
 {
   "/api/": {
-    "target": "http://localhost:53328",
+    "target": "http://localhost:53328/TpiEvaluation",
     "secure": false,
     "changeOrigin": true
+  },
+  "/assets/*": {
+    "target": "http://localhost:4209"
+  },
+  "/clientApp/assets/**/*.woff": {
+    "target": "http://localhost:53328/TpiEvaluation"
+  },
+  "/clientApp/assets/**/*.woff2": {
+    "target": "http://localhost:53328/TpiEvaluation"
+  },
+  "/clientApp/assets/**/*.ttf": {
+    "target": "http://localhost:53328/TpiEvaluation"
   }
 }

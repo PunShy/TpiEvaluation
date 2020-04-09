@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +10,7 @@ namespace CpcBaseProject.Controllers
     {
         public ActionResult Index()
         {
-            return File("~/AngularOutput/index.html", "text/html");
+            return File("~/clientApp/index.html", "text/html");
         }
     }
 }

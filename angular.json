@@ -17,15 +17,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "deployUrl": "./AngularOutput/",
-            "outputPath": "../AngularOutput",
+            "deployUrl": "/TpiEvaluation/clientApp/",
+            "outputPath": "clientApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/assets"
+              "src/assets/"
             ],
             "styles": [
               "src/styles.scss",

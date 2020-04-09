@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4209 --open --baseHref=/ --proxy-config proxy.config.json",
+    "start": "ng serve --port 4209 --open --baseHref=/ --serve-path=/ --proxy-config proxy.config.json",
     "build": "ng build",
     "buildP": "ng build --prod --base-href /TpiEvaluation/ ",
     "test": "ng test",

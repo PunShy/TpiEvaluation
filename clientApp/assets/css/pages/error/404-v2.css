@@ -1,0 +1,37 @@
+.kt-error404-v2--enabled {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position: center bottom; }
+
+.kt-error404-v2 {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start; }
+  @media (max-width: 768px) {
+    .kt-error404-v2 {
+      padding: 2rem; } }
+  .kt-error404-v2 .kt-error404-v2__content {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; }
+    .kt-error404-v2 .kt-error404-v2__content .kt-error404-v2__title {
+      font-size: 12rem;
+      color: #ffffff;
+      font-weight: 700; }
+    .kt-error404-v2 .kt-error404-v2__content .kt-error404-v2__desc {
+      color: #ffffff;
+      font-size: 1.5rem; }
+      @media (max-width: 768px) {
+        .kt-error404-v2 .kt-error404-v2__content .kt-error404-v2__desc {
+          text-align: center; } }
+
+.kt-bg-error404-v2 {
+  background-image: url(../../../media/404-bg2.jpg); }
+  @media (max-width: 768px) {
+    .kt-bg-error404-v2 {
+      background-image: url(../../../media/bg-mobile-2.jpg); } }
+
