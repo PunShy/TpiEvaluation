@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "deployUrl": "/TpiEvaluation/clientApp/",
+            "deployUrl": "/TpiEvaluation2/clientApp/",
             "outputPath": "clientApp",
             "index": "src/index.html",
             "main": "src/main.ts",
