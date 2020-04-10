@@ -3,6 +3,7 @@ import { OlService } from 'src/app/ol/ol.service';
 import { DashboardService } from '../dashboard.service';
 import { IEventInfo } from 'src/app/backstage/editor-map/editor-map.component';
 import { MatSelectChange } from '@angular/material/select';
+import * as turf from '@turf/turf'
 
 
 @Component({
@@ -98,6 +99,19 @@ export class MenuToolsComponent implements OnInit {
       this.olSer.clearHeatmapFeature();
       this.makeRoadFeatures();
     }
+    this.aaa();
+  }
+
+  aaa() {
+    let line;
+
+    this.showEventItems.forEach(ele => {
+      line = turf.lineString([[parseFloat(ele.StartX), parseFloat(ele.StartY)], [parseFloat(ele.EndX), parseFloat(ele.EndY)]]);
+      const ss = turf.along(line, 0.100, { units: 'kilometers' });
+      const ss1 = turf.along(line, 1000, { units: 'kilometers' });
+      console.log(ss);
+    });
+
   }
 
 }
