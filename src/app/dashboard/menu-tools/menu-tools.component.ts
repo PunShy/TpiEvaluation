@@ -3,6 +3,7 @@ import { OlService } from 'src/app/ol/ol.service';
 import { DashboardService } from '../dashboard.service';
 import { IEventInfo } from 'src/app/backstage/editor-map/editor-map.component';
 import { MatSelectChange } from '@angular/material/select';
+import GeoJSON from 'ol/format/GeoJSON';
 import * as turf from '@turf/turf'
 
 
@@ -89,6 +90,7 @@ export class MenuToolsComponent implements OnInit {
       this.olSer.addHeatmapFeature(point1);
       const point2 = this.olSer.createPointFeature([ele.EndX, ele.EndY]);
       this.olSer.addHeatmapFeature(point2);
+      this.alongPointMarker(point1, point2);
     });
   }
 
@@ -99,19 +101,24 @@ export class MenuToolsComponent implements OnInit {
       this.olSer.clearHeatmapFeature();
       this.makeRoadFeatures();
     }
-    this.aaa();
   }
 
-  aaa() {
-    let line;
+  // 沿著指定線，產生指定距離的新點
+  alongPointMarker(startFeature, endFeature) {
+    const format = new GeoJSON();
+    const turfPoint1: any = format.writeFeatureObject(startFeature);
+    const turfPoint2: any = format.writeFeatureObject(endFeature);
+    const options: { units?: any } = { units: 'kilometers' };
 
-    this.showEventItems.forEach(ele => {
-      line = turf.lineString([[parseFloat(ele.StartX), parseFloat(ele.StartY)], [parseFloat(ele.EndX), parseFloat(ele.EndY)]]);
-      const ss = turf.along(line, 0.100, { units: 'kilometers' });
-      const ss1 = turf.along(line, 1000, { units: 'kilometers' });
-      console.log(ss);
-    });
+    const length = turf.distance(turfPoint1, turfPoint2, options);
+    const line = turf.lineString([turfPoint1.geometry.coordinates, turfPoint2.geometry.coordinates])
+    const distance = 0.1;// km
+    for (let i = 0; i <= length/ distance; i++) {
+      const nextPoint = turf.along(line, i * distance, options);
 
+      this.olSer.addHeatmapFeature(format.readFeature(nextPoint));
+    }
   }
+
 
 }
