@@ -101,3 +101,4 @@ D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Release\TpiEvaluation.cs
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Release\TpiEvaluation.csproj.CopyComplete
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Release\CpcBaseProject.dll
 D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Release\CpcBaseProject.pdb
+D:\GoogleDrive\CPC_CODE\TpiEvaluation\TpiEvaluation\obj\Release\TpiEvaluation.csprojAssemblyReference.cache
