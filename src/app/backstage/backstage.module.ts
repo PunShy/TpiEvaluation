@@ -11,10 +11,11 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { BackstageService } from './backstage.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageComponent } from './message/message.component';
+import { AbcComponent } from './abc/abc.component';
 
 
 @NgModule({
-  declarations: [BackstageComponent, EditorMapComponent, AddTaskComponent, EventsInTaskComponent, MessageComponent, ],
+  declarations: [BackstageComponent, EditorMapComponent, AddTaskComponent, EventsInTaskComponent, MessageComponent, AbcComponent, ],
   imports: [
     CommonModule,
     BackstageRoutingModule,

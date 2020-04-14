@@ -4,16 +4,7 @@
     "secure": false,
     "changeOrigin": true
   },
-  "/assets/*": {
-    "target": "http://localhost:4209"
-  },
-  "/clientApp/assets/**/*.woff": {
-    "target": "http://localhost:53328/TpiEvaluation2"
-  },
-  "/clientApp/assets/**/*.woff2": {
-    "target": "http://localhost:53328/TpiEvaluation2"
-  },
-  "/clientApp/assets/**/*.ttf": {
+  "/clientApp/assets/": {
     "target": "http://localhost:53328/TpiEvaluation2"
   }
 }
