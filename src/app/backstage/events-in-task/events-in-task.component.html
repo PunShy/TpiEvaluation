@@ -80,13 +80,15 @@
                 </div>
                 <div class="form-group">
                   <label>備註</label>
-                  <input type="text" class="form-control" placeholder="請輸入..." name="Memo"
-                    [(ngModel)]="element.Memo">
+                  <input type="text" class="form-control" placeholder="請輸入..." name="Memo" [(ngModel)]="element.Memo">
                 </div>
-                <button type="button" class="btn btn-outline-brand btn-icon"
-                  (click)="isimgUploadOpen = !isimgUploadOpen">
-                  <i class="fa fa-cloud-upload-alt"></i></button>
-                <button type="submit" class="btn btn-warning btn-sm saveBtn">儲存</button>
+                <span>
+                  <button type="button" class="btn btn-outline-brand btn-icon"
+                    (click)="isimgUploadOpen = !isimgUploadOpen">
+                    <i class="fa fa-cloud-upload-alt"></i></button>
+                  <button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-sm saveBtn">儲存</button>
+                  <label *ngIf="form.invalid" class="alert alert-info">儲存前請先填妥資料</label>
+                </span>
               </form>
             </div>
           </div>
@@ -95,8 +97,8 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <button type="button" class="btn btn-outline-brand btn-icon"
-                  (click)="isimgUploadOpen = !isimgUploadOpen">
-                  <i class="fa fa-angle-double-up"></i></button>
+                    (click)="isimgUploadOpen = !isimgUploadOpen">
+                    <i class="fa fa-angle-double-up"></i></button>
                 </div>
                 <label class="margin-left-10px">缺失照片</label>
               </div>
